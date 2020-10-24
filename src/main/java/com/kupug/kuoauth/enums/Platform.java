@@ -1,12 +1,10 @@
 package com.kupug.kuoauth.enums;
 
 import com.kupug.kuoauth.KuOAuthPlatform;
-import com.kupug.kuoauth.platform.alipay.AlipayPlatform;
 import com.kupug.kuoauth.platform.dingtalk.DingtalkPlatform;
-import com.kupug.kuoauth.platform.fackbook.FacebookPlatform;
+import com.kupug.kuoauth.platform.facebook.FacebookPlatform;
 import com.kupug.kuoauth.platform.gitee.GiteePlatform;
 import com.kupug.kuoauth.platform.github.GithubPlatform;
-import com.kupug.kuoauth.platform.google.GooglePlatform;
 import com.kupug.kuoauth.platform.qq.QqPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatMpPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatOpPlatform;
@@ -21,6 +19,8 @@ import com.kupug.kuoauth.platform.weibo.WeiboPlatform;
  * @since 1.0
  */
 public enum Platform {
+
+    FACEBOOK(FacebookPlatform.class, "facebook平台"),
 
     WECHATMP(WechatMpPlatform.class, "微信公众号平台"),
     WECHAT(WechatOpPlatform.class,"微信开放平台"),

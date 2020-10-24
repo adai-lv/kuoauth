@@ -1,36 +1,8 @@
 package com.yabale.kuoauth;
 
-public enum OAuthConfigTest {
+public interface OAuthConfigTest {
 
-    QQ("***", "***", "***"),
-
-    GITHUB("***", "***", "***"),
-
-    GITEE("***", "***", "***");
-
-    private String clientId;
-    private String clientSecret;
-    private String redirectUri;
-
-    OAuthConfigTest(String clientId, String clientSecret, String redirectUri) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-        this.redirectUri = redirectUri;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public String getRedirectUri() {
-        return redirectUri;
-    }
-
-    public static String getAlipayPublicKey() {
-            return "";
-        }
+    String XXX_CLIENTID = "******";
+    String XXX_CLIENTSECRET = "******";
+    String XXX_REDIRECTURI = "******";
 }

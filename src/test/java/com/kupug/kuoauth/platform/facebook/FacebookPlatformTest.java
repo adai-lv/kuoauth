@@ -1,30 +1,30 @@
-package com.kupug.kuoauth.platform.dingtalk;
+package com.kupug.kuoauth.platform.facebook;
 
-import com.kupug.kuoauth.KuOAuthCallback;
 import com.kupug.kuoauth.KuOAuthConfig;
+import com.kupug.kuoauth.OAuthConfigTest;
+import com.kupug.kuoauth.KuOAuthCallback;
 import com.kupug.kuoauth.KuOAuthLogin;
 import com.kupug.kuoauth.KuOAuthToken;
 import com.kupug.kuoauth.KuOAuthUser;
-import com.kupug.kuoauth.OAuthConfigTest;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.OAuthUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DingtalkPlatformTest {
+public class FacebookPlatformTest {
 
-    private DingtalkPlatform platform;
+    private FacebookPlatform platform;
 
     @Before
     public void init() {
 
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
-                .clientId(OAuthConfigTest.DINGTALK_CLIENTID)
-                .clientSecret(OAuthConfigTest.DINGTALK_CLIENTSECRET)
-                .redirectUri(OAuthConfigTest.DINGTALK_REDIRECTURI)
+                .clientId(OAuthConfigTest.FACEBOOK_CLIENTID)
+                .clientSecret(OAuthConfigTest.FACEBOOK_CLIENTSECRET)
+                .redirectUri(OAuthConfigTest.FACEBOOK_REDIRECTURI)
                 .build();
 
-        platform = new DingtalkPlatform(kuOAuthConfig);
+        platform = new FacebookPlatform(kuOAuthConfig);
     }
 
     @Test
@@ -37,8 +37,8 @@ public class DingtalkPlatformTest {
     public void accessToken() {
 
         KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
-                .code("ccce5e63fa123ee6810975fcab10cc1d")
-                .state("e114266172ee759133b86a5f86ce90c1")
+                .code("4/0AfDhmrjxK16Q_EddRUMj5Gb93iXozDDaPUEuQQnW_3IUvo_HN_QwplpmJJPxcPR_wriWxA")
+                .state("b2cc9139ce1723ea8e0f12f27f56b0b3")
                 .build();
 
         KuOAuthToken oAuthToken = platform.getAccessToken(oAuthCallback);
@@ -50,7 +50,7 @@ public class DingtalkPlatformTest {
     public void userInfo() {
 
         KuOAuthToken oAuthToken = KuOAuthToken.builder()
-                .accessToken("ccce5e63fa123ee6810975fcab10cc1d")
+                .accessToken("933fbfbd9975d6f33ef42bc4b0336e0e32664f2d3")
                 .build();
 
         KuOAuthUser oAuthUser = platform.getUserInfo(oAuthToken);
@@ -62,8 +62,8 @@ public class DingtalkPlatformTest {
     public void login() {
 
         KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
-                .code("13BF09BEC1782635923D12DE6F983435")
-                .state("a526e306d200e74193088b17bbd38830")
+                .code("7cbbc5c765ec885f0d4a")
+                .state("b73455ac3dfbc6f129e99a9b88068ad2")
                 .build();
 
         KuOAuthLogin oAuthLogin = platform.login(oAuthCallback);

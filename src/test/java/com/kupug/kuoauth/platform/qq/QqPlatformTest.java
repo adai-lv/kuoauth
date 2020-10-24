@@ -21,9 +21,9 @@ public class QqPlatformTest {
     public void init() {
 
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
-                .clientId(OAuthConfigTest.QQ.getClientId())
-                .clientSecret(OAuthConfigTest.QQ.getClientSecret())
-                .redirectUri(OAuthConfigTest.QQ.getRedirectUri())
+                .clientId(OAuthConfigTest.QQ_CLIENTID)
+                .clientSecret(OAuthConfigTest.QQ_CLIENTSECRET)
+                .redirectUri(OAuthConfigTest.QQ_REDIRECTURI)
                 .build();
 
         platform = (QqPlatform) PlatformFactory.newInstance(Platform.QQ, kuOAuthConfig);

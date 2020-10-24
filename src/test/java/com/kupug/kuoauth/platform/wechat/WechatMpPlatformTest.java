@@ -21,9 +21,9 @@ public class WechatMpPlatformTest {
     public void init() {
 
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
-                .clientId(OAuthConfigTest.WECHATMP.getClientId())
-                .clientSecret(OAuthConfigTest.WECHATMP.getClientSecret())
-                .redirectUri(OAuthConfigTest.WECHATMP.getRedirectUri())
+                .clientId(OAuthConfigTest.WECHATMP_CLIENTID)
+                .clientSecret(OAuthConfigTest.WECHATMP_CLIENTSECRET)
+                .redirectUri(OAuthConfigTest.WECHATMP_REDIRECTURI)
                 .build();
 
         platform = (WechatMpPlatform) PlatformFactory.newInstance(Platform.WECHATMP, kuOAuthConfig);
