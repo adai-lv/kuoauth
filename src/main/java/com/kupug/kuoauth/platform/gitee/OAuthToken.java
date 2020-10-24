@@ -71,7 +71,7 @@ final class OAuthToken implements IOAuthToken {
 
     @Override
     public String toString() {
-        return "GiteeOAuthToken{" +
+        return "OAuthToken{" +
                 "accessToken='" + accessToken + '\'' +
                 ", refreshToken='" + refreshToken + '\'' +
                 ", expiresIn=" + expiresIn +

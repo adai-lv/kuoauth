@@ -19,9 +19,9 @@ public class GithubPlatformTest {
     public void init() {
 
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
-                .clientId(OAuthConfigTest.GITHUB.getClientId())
-                .clientSecret(OAuthConfigTest.GITHUB.getClientSecret())
-                .redirectUri(OAuthConfigTest.GITHUB.getRedirectUri())
+                .clientId(OAuthConfigTest.GITHUB_CLIENTID)
+                .clientSecret(OAuthConfigTest.GITHUB_CLIENTSECRET)
+                .redirectUri(OAuthConfigTest.GITHUB_REDIRECTURI)
                 .build();
 
         platform = new GithubPlatform(kuOAuthConfig);

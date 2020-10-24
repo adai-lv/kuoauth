@@ -19,9 +19,9 @@ public class GiteePlatformTest {
     public void init() {
 
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
-                .clientId(OAuthConfigTest.GITEE.getClientId())
-                .clientSecret(OAuthConfigTest.GITEE.getClientSecret())
-                .redirectUri(OAuthConfigTest.GITEE.getRedirectUri())
+                .clientId(OAuthConfigTest.GITEE_CLIENTID)
+                .clientSecret(OAuthConfigTest.GITEE_CLIENTSECRET)
+                .redirectUri(OAuthConfigTest.GITEE_REDIRECTURI)
                 .build();
 
         platform = new GiteePlatform(kuOAuthConfig);

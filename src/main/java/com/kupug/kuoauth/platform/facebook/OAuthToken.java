@@ -1,23 +1,21 @@
-package com.kupug.kuoauth.platform.github;
+package com.kupug.kuoauth.platform.facebook;
 
 import com.kupug.kuoauth.KuOAuthToken;
 import com.kupug.kuoauth.platform.IOAuthToken;
 import com.kupug.kuoauth.utils.JsonUtils;
 
-import java.util.Map;
-
 /**
  * <p>
- * github oauth token
+ * Facebook oauth token
  * </p>
  *
  * @author MaoHai.LV
- * @since 1.0
+ * @since 1.1
  */
 final class OAuthToken implements IOAuthToken {
 
     private String accessToken;
-    private String scope;
+    private Integer expiresIn;
     private String tokenType;
 
     public String getAccessToken() {
@@ -28,12 +26,12 @@ final class OAuthToken implements IOAuthToken {
         this.accessToken = accessToken;
     }
 
-    public String getScope() {
-        return scope;
+    public Integer getExpiresIn() {
+        return expiresIn;
     }
 
-    public void setScope(String scope) {
-        this.scope = scope;
+    public void setExpiresIn(Integer expiresIn) {
+        this.expiresIn = expiresIn;
     }
 
     public String getTokenType() {
@@ -48,7 +46,7 @@ final class OAuthToken implements IOAuthToken {
     public String toString() {
         return "OAuthToken{" +
                 "accessToken='" + accessToken + '\'' +
-                ", scope='" + scope + '\'' +
+                ", expiresIn=" + expiresIn +
                 ", tokenType='" + tokenType + '\'' +
                 '}';
     }
@@ -62,17 +60,8 @@ final class OAuthToken implements IOAuthToken {
     public KuOAuthToken valueOf() {
         return KuOAuthToken.builder()
                 .accessToken(this.getAccessToken())
+                .expiresIn(this.getExpiresIn())
                 .rawInfo(JsonUtils.toJSONString(this))
                 .build();
-    }
-
-    public static KuOAuthToken valueOf(Map<String, String> values) {
-
-        OAuthToken token = new OAuthToken();
-        token.setAccessToken(values.get("access_token"));
-        token.setScope(values.get("scope"));
-        token.setTokenType(values.get("token_type"));
-
-        return token.valueOf();
     }
 }
