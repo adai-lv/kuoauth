@@ -21,9 +21,9 @@ public class WeiboPlatformTest {
     public void init() {
 
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
-                .clientId(OAuthConfigTest.WEIBO.getClientId())
-                .clientSecret(OAuthConfigTest.WEIBO.getClientSecret())
-                .redirectUri(OAuthConfigTest.WEIBO.getRedirectUri())
+                .clientId(OAuthConfigTest.WEIBO_CLIENTID)
+                .clientSecret(OAuthConfigTest.WEIBO_CLIENTSECRET)
+                .redirectUri(OAuthConfigTest.WEIBO_REDIRECTURI)
                 .build();
 
         platform = (WeiboPlatform) PlatformFactory.newInstance(Platform.WEIBO, kuOAuthConfig);

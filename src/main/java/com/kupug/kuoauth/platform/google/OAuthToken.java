@@ -1,24 +1,43 @@
-package com.kupug.kuoauth.platform.github;
+package com.kupug.kuoauth.platform.google;
 
 import com.kupug.kuoauth.KuOAuthToken;
 import com.kupug.kuoauth.platform.IOAuthToken;
 import com.kupug.kuoauth.utils.JsonUtils;
 
-import java.util.Map;
-
 /**
  * <p>
- * github oauth token
+ * Google oauth token
  * </p>
  *
  * @author MaoHai.LV
- * @since 1.0
+ * @since 1.1
  */
 final class OAuthToken implements IOAuthToken {
 
+    private String error;
+    private String errorDescription;
+
     private String accessToken;
+    private Integer expiresIn;
     private String scope;
     private String tokenType;
+    private String idToken;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getErrorDescription() {
+        return errorDescription;
+    }
+
+    public void setErrorDescription(String errorDescription) {
+        this.errorDescription = errorDescription;
+    }
 
     public String getAccessToken() {
         return accessToken;
@@ -26,6 +45,14 @@ final class OAuthToken implements IOAuthToken {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    public Integer getExpiresIn() {
+        return expiresIn;
+    }
+
+    public void setExpiresIn(Integer expiresIn) {
+        this.expiresIn = expiresIn;
     }
 
     public String getScope() {
@@ -44,12 +71,22 @@ final class OAuthToken implements IOAuthToken {
         this.tokenType = tokenType;
     }
 
+    public String getIdToken() {
+        return idToken;
+    }
+
+    public void setIdToken(String idToken) {
+        this.idToken = idToken;
+    }
+
     @Override
     public String toString() {
         return "OAuthToken{" +
                 "accessToken='" + accessToken + '\'' +
+                ", expiresIn=" + expiresIn +
                 ", scope='" + scope + '\'' +
                 ", tokenType='" + tokenType + '\'' +
+                ", idToken='" + idToken + '\'' +
                 '}';
     }
 
@@ -62,17 +99,8 @@ final class OAuthToken implements IOAuthToken {
     public KuOAuthToken valueOf() {
         return KuOAuthToken.builder()
                 .accessToken(this.getAccessToken())
+                .expiresIn(this.getExpiresIn())
                 .rawInfo(JsonUtils.toJSONString(this))
                 .build();
-    }
-
-    public static KuOAuthToken valueOf(Map<String, String> values) {
-
-        OAuthToken token = new OAuthToken();
-        token.setAccessToken(values.get("access_token"));
-        token.setScope(values.get("scope"));
-        token.setTokenType(values.get("token_type"));
-
-        return token.valueOf();
     }
 }
