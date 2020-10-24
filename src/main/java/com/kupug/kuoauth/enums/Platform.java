@@ -2,6 +2,7 @@ package com.kupug.kuoauth.enums;
 
 import com.kupug.kuoauth.KuOAuthPlatform;
 import com.kupug.kuoauth.platform.aliyun.AliyunPlatform;
+import com.kupug.kuoauth.platform.baidu.BaiduPlatform;
 import com.kupug.kuoauth.platform.dingtalk.DingtalkPlatform;
 import com.kupug.kuoauth.platform.facebook.FacebookPlatform;
 import com.kupug.kuoauth.platform.gitee.GiteePlatform;
@@ -24,6 +25,7 @@ public enum Platform {
 
     GOOGLE(GooglePlatform.class, "google平台"),
     FACEBOOK(FacebookPlatform.class, "facebook平台"),
+    BAIDU(BaiduPlatform.class, "百度平台"),
 
     WECHATMP(WechatMpPlatform.class, "微信公众号平台"),
     WECHAT(WechatOpPlatform.class,"微信开放平台"),
