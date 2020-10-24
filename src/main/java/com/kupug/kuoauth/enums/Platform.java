@@ -5,6 +5,7 @@ import com.kupug.kuoauth.platform.dingtalk.DingtalkPlatform;
 import com.kupug.kuoauth.platform.facebook.FacebookPlatform;
 import com.kupug.kuoauth.platform.gitee.GiteePlatform;
 import com.kupug.kuoauth.platform.github.GithubPlatform;
+import com.kupug.kuoauth.platform.google.GooglePlatform;
 import com.kupug.kuoauth.platform.qq.QqPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatMpPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatOpPlatform;
@@ -20,6 +21,7 @@ import com.kupug.kuoauth.platform.weibo.WeiboPlatform;
  */
 public enum Platform {
 
+    GOOGLE(GooglePlatform.class, "google平台"),
     FACEBOOK(FacebookPlatform.class, "facebook平台"),
 
     WECHATMP(WechatMpPlatform.class, "微信公众号平台"),
