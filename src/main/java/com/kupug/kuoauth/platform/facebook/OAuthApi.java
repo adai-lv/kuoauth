@@ -8,7 +8,7 @@ import com.kupug.kuoauth.platform.IOAuthApi;
  * </p>
  *
  * @author MaoHai.LV
- * @since 1.0
+ * @since 1.1
  */
 enum OAuthApi implements IOAuthApi {
 

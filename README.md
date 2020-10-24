@@ -64,6 +64,9 @@ KuOAuthLogin oAuthLogin = platform.login(oAuthCallback);
 ```
 
 ### 版本迭代
+#### v1.1 2020-10-24
+- Google、Facebook、阿里云平台授权登录功能逻辑开发
+
 #### v1.0 2020-10-23
 - feat: 工具助手uuid、url、collection、string等基本功能逻辑开发
 - feat: 基本 okhttp 网络组件，构建 HttpClient 类工具

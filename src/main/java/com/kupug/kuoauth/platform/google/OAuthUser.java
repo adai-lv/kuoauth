@@ -12,7 +12,7 @@ import com.kupug.kuoauth.utils.JsonUtils;
  * </p>
  *
  * @author MaoHai.LV
- * @since 1.0
+ * @since 1.1
  */
 public final class OAuthUser implements IOAuthUser {
 

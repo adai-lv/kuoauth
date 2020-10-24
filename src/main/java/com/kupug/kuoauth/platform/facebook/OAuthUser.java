@@ -14,7 +14,7 @@ import java.util.Objects;
  * </p>
  *
  * @author MaoHai.LV
- * @since 1.0
+ * @since 1.1
  */
 final class OAuthUser implements IOAuthUser {
 

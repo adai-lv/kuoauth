@@ -100,7 +100,7 @@ final class OAuthUser implements IOAuthUser {
 
     @Override
     public String toString() {
-        return "GiteeOAuthUser{" +
+        return "OAuthUser{" +
                 "id='" + id + '\'' +
                 ", login='" + login + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +

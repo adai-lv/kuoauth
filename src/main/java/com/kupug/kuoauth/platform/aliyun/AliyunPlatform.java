@@ -1,5 +1,6 @@
-package com.kupug.kuoauth.platform.google;
+package com.kupug.kuoauth.platform.aliyun;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.kupug.kuoauth.KuOAuthCallback;
 import com.kupug.kuoauth.KuOAuthConfig;
 import com.kupug.kuoauth.KuOAuthException;
@@ -9,19 +10,17 @@ import com.kupug.kuoauth.platform.OAuthPlatform;
 import com.kupug.kuoauth.utils.HttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 
-import java.util.Objects;
-
 /**
  * <p>
- * Google 平台授权
+ * 阿里云授权平台
  * </p>
  *
  * @author MaoHai.LV
  * @since 1.1
  */
-public final class GooglePlatform extends OAuthPlatform {
+public final class AliyunPlatform extends OAuthPlatform {
 
-    public GooglePlatform(KuOAuthConfig config) {
+    public AliyunPlatform(KuOAuthConfig config) {
         super(config);
         this.oAuthApi = OAuthApi.DEFAULT;
         this.oAuthScopes = OAuthScope.values();
@@ -35,16 +34,52 @@ public final class GooglePlatform extends OAuthPlatform {
      */
     @Override
     public String authorize(String state) {
+
         return HttpClient.builder()
                 .fromUrl(oAuthApi.authorize())
                 .queryParam("response_type", "code")
+                .queryParam("access_type", "offline")
                 .queryParam("client_id", config.getClientId())
                 .queryParam("redirect_uri", config.getRedirectUri())
                 .queryParam("scope", getOAuthScopes())
                 .queryParam("state", getRealState(state))
-                .queryParam("access_type", "offline")
-                .queryParam("prompt", "select_account")
                 .build();
+    }
+
+    @Override
+    public KuOAuthToken refresh(KuOAuthToken authToken) {
+
+        String responseBody = HttpClient.builder()
+                .fromUrl(oAuthApi.refresh())
+                .queryParam("client_id", config.getClientId())
+                .queryParam("client_secret", config.getClientSecret())
+                .queryParam("refresh_token", authToken.getRefreshToken())
+                .queryParam("grant_type", "refresh_token")
+                .post();
+
+        OAuthToken oAuthToken = JsonUtils.parseObject(responseBody, OAuthToken.class);
+
+        return oAuthToken.valueOf();
+    }
+
+    @Override
+    public boolean revoke(KuOAuthToken authToken) {
+
+        String responseBody = HttpClient.builder()
+                .fromUrl(oAuthApi.revoke())
+                .queryParam("token", authToken.getAccessToken())
+                .queryParam("client_id", config.getClientId())
+                .post();
+
+        JsonNode object = JsonUtils.parseObject(responseBody);
+        boolean success = object.get("success").asBoolean();
+        String messgae = object.get("message").asText();
+
+        if (!success) {
+            throw new KuOAuthException("撤销刷新令牌失败: " + messgae);
+        }
+
+        return success;
     }
 
     @Override
@@ -61,29 +96,17 @@ public final class GooglePlatform extends OAuthPlatform {
 
         OAuthToken oAuthToken = JsonUtils.parseObject(responseBody, OAuthToken.class);
 
-        if (Objects.nonNull(oAuthToken.getError())) {
-            throw new KuOAuthException(String.format("[%s]%s",
-                    oAuthToken.getError(), oAuthToken.getErrorDescription()));
-        }
-
         return oAuthToken.valueOf();
     }
 
     @Override
     protected KuOAuthUser getUserInfo(KuOAuthToken authToken) {
-
         String responseBody = HttpClient.builder()
                 .fromUrl(oAuthApi.userInfo())
-                .addHeader("Authorization", "Bearer " + authToken.getAccessToken())
                 .queryParam("access_token", authToken.getAccessToken())
-                .post();
+                .get();
 
         OAuthUser oAuthUser = JsonUtils.parseObject(responseBody, OAuthUser.class);
-
-        if (Objects.nonNull(oAuthUser.getError())) {
-            throw new KuOAuthException(String.format("[%s]%s",
-                    oAuthUser.getError(), oAuthUser.getErrorDescription()));
-        }
 
         return oAuthUser.valueOf();
     }
