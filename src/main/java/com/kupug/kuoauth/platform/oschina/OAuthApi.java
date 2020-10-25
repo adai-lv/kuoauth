@@ -1,30 +1,30 @@
-package com.kupug.kuoauth.platform.gitee;
+package com.kupug.kuoauth.platform.oschina;
 
 import com.kupug.kuoauth.platform.IOAuthApi;
 
 /**
  * <p>
- * gitee 平台的 URI 配置
+ * oschina 平台的 URI 配置
  * </p>
  *
  * @author MaoHai.LV
- * @since 1.0
+ * @since 1.1
  */
 enum OAuthApi implements IOAuthApi {
     DEFAULT {
         @Override
         public String authorize() {
-            return "https://gitee.com/oauth/authorize";
+            return "https://www.oschina.net/action/oauth2/authorize";
         }
 
         @Override
         public String accessToken() {
-            return "https://gitee.com/oauth/token";
+            return "https://www.oschina.net/action/openapi/token";
         }
 
         @Override
         public String userInfo() {
-            return "https://gitee.com/api/v5/user";
+            return "https://www.oschina.net/action/openapi/user";
         }
     }
 }

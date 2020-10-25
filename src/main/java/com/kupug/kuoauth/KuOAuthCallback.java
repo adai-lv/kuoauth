@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 public final class KuOAuthCallback {
 
     /**
+     * 授权码
      * 访问 AuthorizeUrl 后, 回调时带的参数code
      *
      * 大部份平台: code

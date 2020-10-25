@@ -9,6 +9,7 @@ import com.kupug.kuoauth.platform.facebook.FacebookPlatform;
 import com.kupug.kuoauth.platform.gitee.GiteePlatform;
 import com.kupug.kuoauth.platform.github.GithubPlatform;
 import com.kupug.kuoauth.platform.google.GooglePlatform;
+import com.kupug.kuoauth.platform.oschina.OschinaPlatform;
 import com.kupug.kuoauth.platform.qq.QqPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatMpPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatOpPlatform;
@@ -37,6 +38,7 @@ public enum Platform {
     DINGTALK(DingtalkPlatform.class, "钉钉平台"),
 
     WEIBO(WeiboPlatform.class, "新浪微博平台"),
+    OSCHINA(OschinaPlatform.class, "开源中国平台"),
     GITHUB(GithubPlatform.class, "github平台"),
     GITEE(GiteePlatform.class, "gitee平台");
 
