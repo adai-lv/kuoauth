@@ -1,6 +1,7 @@
 package com.kupug.kuoauth.enums;
 
 import com.kupug.kuoauth.KuOAuthPlatform;
+import com.kupug.kuoauth.platform.alipay.AlipayPlatform;
 import com.kupug.kuoauth.platform.aliyun.AliyunPlatform;
 import com.kupug.kuoauth.platform.baidu.BaiduPlatform;
 import com.kupug.kuoauth.platform.dingtalk.DingtalkPlatform;
@@ -31,6 +32,7 @@ public enum Platform {
     WECHAT(WechatOpPlatform.class,"微信开放平台"),
     QQ(QqPlatform.class, "QQ平台"),
 
+    ALIPAY(AlipayPlatform.class, "支付宝平台"),
     ALIYUN(AliyunPlatform.class, "阿里云平台"),
     DINGTALK(DingtalkPlatform.class, "钉钉平台"),
 
