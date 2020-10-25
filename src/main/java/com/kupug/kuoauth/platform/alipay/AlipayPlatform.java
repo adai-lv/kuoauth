@@ -57,24 +57,22 @@ public final class AlipayPlatform extends OAuthPlatform {
     @Override
     public KuOAuthToken refresh(KuOAuthToken authToken) {
 
-//        AlipaySystemOauthTokenRequest request = new AlipaySystemOauthTokenRequest();
-//        request.setGrantType("refresh_token");
-//        request.setCode(authToken.getRefreshToken());
-//
-//        AlipaySystemOauthTokenResponse response;
-//        try {
-//            response = this.alipayClient.execute(request);
-//        } catch (Exception e) {
-//            throw new KuOAuthException("支付宝 refresh token 失败: " + e.getMessage(), e);
-//        }
-//
-//        if (!response.isSuccess()) {
-//            throw new KuOAuthException("支付宝 refresh token 失败: " + response.getSubMsg());
-//        }
-//
-//        return OAuthToken.valueOf(response);
+        AlipaySystemOauthTokenRequest request = new AlipaySystemOauthTokenRequest();
+        request.setGrantType("refresh_token");
+        request.setCode(authToken.getRefreshToken());
 
-        return null;
+        AlipaySystemOauthTokenResponse response;
+        try {
+            response = this.alipayClient.execute(request);
+        } catch (Exception e) {
+            throw new KuOAuthException("支付宝 refresh token 失败: " + e.getMessage(), e);
+        }
+
+        if (!response.isSuccess()) {
+            throw new KuOAuthException("支付宝 refresh token 失败: " + response.getSubMsg());
+        }
+
+        return OAuthToken.valueOf(response);
     }
 
     @Override
