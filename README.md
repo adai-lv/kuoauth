@@ -19,7 +19,7 @@
   - 微信开放平台登录、QQ：平台也支持获取 unionId
   - Google：openId 为用户的 sub，sub为Google的所有账户体系中用户唯一的身份标识符，详见：[OpenID Connect](https://developers.google.com/identity/protocols/oauth2/openid-connect)
 
-注：建议通过 `kuuid + platform` 的方式唯一确定一个用户，这样可以解决用户身份归属的问题。因为 `单个用户ID` 在某一平台中是唯一的，但不能保证在所有平台中都是唯一的。
+注：建议通过 `openId + platform` 的方式唯一确定一个用户，这样可以解决用户身份归属的问题。因为 `单个用户ID` 在某一平台中是唯一的，但不能保证在所有平台中都是唯一的。
 
 ### 快速开始
 
