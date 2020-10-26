@@ -125,7 +125,7 @@ final class OAuthUser implements IOAuthUser {
                 .username(this.getLoginName())
                 .nickname(this.getName())
                 .gender(Gender.UNKNOWN)
-                .platform(Platform.GITEE.name())
+                .platform(Platform.ALIYUN.name())
                 .rawInfo(JsonUtils.toJSONString(this))
                 .build();
     }

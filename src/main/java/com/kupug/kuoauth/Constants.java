@@ -23,4 +23,14 @@ public interface Constants {
      * 加密算法
      */
     String HMAC_SHA_256 = "HmacSHA256";
+
+    /**
+     * 签名文档
+     */
+    String SING_TYPE_RSA2 = "RSA2";
+
+    /**
+     * json 格式
+     */
+    String FORMAT_JSON = "json";
 }

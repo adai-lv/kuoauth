@@ -2,6 +2,7 @@
 .mvn/
 target/
 *.iml
+**/.DS_Store
 **/OAuthConfigTest.java
 pom.xml.tag
 pom.xml.releaseBackup
