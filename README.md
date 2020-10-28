@@ -1,34 +1,34 @@
 # KuOAuth
 
 ### 介绍
-集成第三方授权登录的工具箱，它可以让开发者脱离繁琐的第三方登录SDK，让实现登录功能变得方便!
+集成第三方授权登录的工具箱，它帮助开发者快速接入第三方登录SDK，专注于自身登录业务功能的实现!
 
 ### 术语
 
-- `clientId` 客户端身份标识符（应用id），在申请完 `Oauth应用` 后，由第三方平台颁发，具有唯一性
-- `clientSecret` 客户端密钥，在申请完 `Oauth应用` 后，由第三方平台颁发
+- `clientId` 客户端身份标识符（应用id），在申请完 `Oauth应用` 后，由 **第三方平台** 颁发，具有唯一性
+- `clientSecret` 客户端密钥，在申请完 `Oauth应用` 后，由 **第三方平台** 颁发
 - `redirectUri` 开发者项目中的有效api地址。用户在确认第三方平台授权（登录）后，第三方平台会重定向到该地址，并携带code等参数
-- `state` 用来保持授权会话流程完整性，防止CSRF攻击的安全的随机的参数，由开发者生成
-- `alipayPublicKey` 支付宝公钥。当选择支付宝登录时，必传该值，由开发者生成
-- `unionId` 是否需要申请unionid，目前只针对qq登录。注：qq授权登录时，获取unionid需要单独发送邮件申请权限。如果个人开发者账号中申请了该权限，可以将该值置为true，在获取openId时就会同步获取unionId。参考链接：[UnionID介绍](http://wiki.connect.qq.com/unionid%E4%BB%8B%E7%BB%8D)
-- `stackOverflowKey` Stack Overflow 登陆时需单独提供的key，由第三方平台颁发
-- `agentId` 企业微信登陆时需单独提供该值，由第三方平台颁发，为授权方的网页应用ID
-- `platform` KuOAuth 支持的第三方平台，比如：GITHUB、GITEE等
-- `openId` 为第三方平台的用户ID。以下几个平台需特别注意：
-  - 钉钉、抖音：openId 为用户的 unionid
-  - 微信开放平台登录、QQ：平台也支持获取 unionId
-  - Google：openId 为用户的 sub，sub为Google的所有账户体系中用户唯一的身份标识符，详见：[OpenID Connect](https://developers.google.com/identity/protocols/oauth2/openid-connect)
+- `state` 用来保持授权会话流程完整性，防止CSRF攻击的安全的随机的参数，由 **开发者** 生成
+- `alipayPublicKey` 支付宝公钥。当选择支付宝登录时，必传该值，由 **开发者** 生成
+- `openId` 为第三方平台的用户ID。
+- `unionId` 为第三方平台多应用联合ID。
+- `platform` KuOAuth 支持的第三方平台，比如：GITHUB、GITEE、QQ、Wechat等
 
-注：建议通过 `openId + platform` 的方式唯一确定一个用户，这样可以解决用户身份归属的问题。因为 `单个用户ID` 在某一平台中是唯一的，但不能保证在所有平台中都是唯一的。
+**注：**
+- 建议通过 `openId + platform` 的方式唯一确定一个用户，这样可以解决用户身份归属的问题。因为 `单个用户ID` 在某一平台中是唯一的，但不能保证在所有平台中都是唯一的。
+- QQ 授权登录时，获取 `unionid` 需要单独发送邮件申请权限。如果个人开发者账号中申请了该权限，可以将该值置为true，在获取 `openId` 时就会同步获取 `unionId`。参考链接：[UnionID介绍](http://wiki.connect.qq.com/unionid%E4%BB%8B%E7%BB%8D)
 
 ### 快速开始
 
 #### 准备工作
+
 1. 申请注册第三方平台的开发者账号
 2. 创建第三方平台的应用，获取配置信息(accessKey, secretKey, redirectUri)
 
 #### 使用方式
+
 - 引入依赖
+
 ```
 <dependency>
   <groupId>com.kupug.kuoauth</groupId>
@@ -38,8 +38,10 @@
 ```
 
 - 调用服务 API
+
 ```
 // 构建 OAuth 平台配置
+// 可以重置授权 scope 的值，具体信息可以参考: com.kupug.kuoauth.platform.IOAuthScope 的实现类
 KuOAuthConfig config = KuOAuthConfig.builder()
     .clientId("clientId")
     .clientSecret("clientSecret")

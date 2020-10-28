@@ -15,7 +15,7 @@ public final class KuOAuthUser {
 
     /**
      * 用户第三方平台的唯一id。
-     * 在调用方集成该组件时，可以用kuuid + platform 唯一确定一个用户
+     * 在调用方集成该组件时，openId + platform 唯一确定一个用户
      */
     private String openId;
 
