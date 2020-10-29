@@ -66,6 +66,10 @@ KuOAuthLogin oAuthLogin = platform.login(oAuthCallback);
 ```
 
 ### 版本迭代
+
+#### v1.2 2020-10-29
+- feat: steam 平台授权登录功能逻辑开发
+
 #### v1.1 2020-10-25
 - feat: Google、Facebook、阿里云平台授权登录功能逻辑开发
 - feat: 百度、支付宝、oschina平台授权登录功能逻辑开发

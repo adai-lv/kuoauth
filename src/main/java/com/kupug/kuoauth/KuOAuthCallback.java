@@ -18,9 +18,9 @@ public final class KuOAuthCallback {
      *
      * 大部份平台: code
      * 支付宝登录: auth_code
-     * 华为登录: authorization_code
+     * steam: openid.claimed_id
      */
-    @JsonAlias(value = {"code", "auth_code", "authorization_code"})
+    @JsonAlias(value = {"code", "auth_code", "openid.claimed_id"})
     private String code;
 
     /**
