@@ -1,6 +1,6 @@
 package com.kupug.kuoauth.platform.wechat;
 
-import com.kupug.kuoauth.KuOAuthConfig;
+import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.platform.weibo.OAuthScope;
 
 /**

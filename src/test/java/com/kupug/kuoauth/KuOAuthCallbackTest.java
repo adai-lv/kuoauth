@@ -1,5 +1,6 @@
 package com.kupug.kuoauth;
 
+import com.kupug.kuoauth.model.KuOAuthCallback;
 import com.kupug.kuoauth.utils.JsonUtils;
 import org.junit.Test;
 

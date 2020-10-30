@@ -1,10 +1,9 @@
 package com.kupug.kuoauth.platform.alipay;
 
 import com.alipay.api.response.AlipayUserInfoShareResponse;
-import com.kupug.kuoauth.KuOAuthUser;
-import com.kupug.kuoauth.enums.Gender;
-import com.kupug.kuoauth.enums.Platform;
-import com.kupug.kuoauth.platform.IOAuthUser;
+import com.kupug.kuoauth.model.KuOAuthUser;
+import com.kupug.kuoauth.model.Gender;
+import com.kupug.kuoauth.model.Platform;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.StringUtils;
 
@@ -16,7 +15,7 @@ import com.kupug.kuoauth.utils.StringUtils;
  * @author MaoHai.LV
  * @since 1.1
  */
-final class OAuthUser implements IOAuthUser {
+final class OAuthUser {
 
     /**
      * 登录用户的UID
@@ -103,7 +102,6 @@ final class OAuthUser implements IOAuthUser {
      *
      * @return KuOAuthUser
      */
-    @Override
     public KuOAuthUser valueOf() {
         String location = String.format("%s-%s", this.getProvince(), this.getCity());
         String userName = StringUtils.isEmpty(this.getUserName())

@@ -1,9 +1,8 @@
 package com.kupug.kuoauth.platform.facebook;
 
-import com.kupug.kuoauth.KuOAuthUser;
-import com.kupug.kuoauth.platform.IOAuthUser;
-import com.kupug.kuoauth.enums.Gender;
-import com.kupug.kuoauth.enums.Platform;
+import com.kupug.kuoauth.model.KuOAuthUser;
+import com.kupug.kuoauth.model.Gender;
+import com.kupug.kuoauth.model.Platform;
 import com.kupug.kuoauth.utils.JsonUtils;
 
 import java.util.Objects;
@@ -16,7 +15,7 @@ import java.util.Objects;
  * @author MaoHai.LV
  * @since 1.1
  */
-final class OAuthUser implements IOAuthUser {
+final class OAuthUser {
 
     private String id;
     private String name;
@@ -120,7 +119,6 @@ final class OAuthUser implements IOAuthUser {
      *
      * @return KuOAuthUser
      */
-    @Override
     public KuOAuthUser valueOf() {
 
         Gender gender = Objects.isNull(this.getGender())

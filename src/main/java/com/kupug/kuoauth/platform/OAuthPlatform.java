@@ -1,13 +1,13 @@
 package com.kupug.kuoauth.platform;
 
-import com.kupug.kuoauth.KuOAuthCallback;
-import com.kupug.kuoauth.KuOAuthConfig;
+import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.KuOAuthException;
-import com.kupug.kuoauth.KuOAuthLogin;
+import com.kupug.kuoauth.model.KuOAuthLogin;
 import com.kupug.kuoauth.KuOAuthPlatform;
-import com.kupug.kuoauth.KuOAuthToken;
-import com.kupug.kuoauth.KuOAuthUser;
-import com.kupug.kuoauth.enums.Separator;
+import com.kupug.kuoauth.model.KuOAuthToken;
+import com.kupug.kuoauth.model.KuOAuthUser;
+import com.kupug.kuoauth.model.Separator;
 import com.kupug.kuoauth.utils.CollectionUtils;
 import com.kupug.kuoauth.utils.OAuthUtils;
 import com.kupug.kuoauth.utils.StringUtils;

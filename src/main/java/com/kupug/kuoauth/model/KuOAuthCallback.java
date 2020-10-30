@@ -1,4 +1,4 @@
-package com.kupug.kuoauth;
+package com.kupug.kuoauth.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 

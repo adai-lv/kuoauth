@@ -1,9 +1,8 @@
 package com.kupug.kuoauth.platform.baidu;
 
-import com.kupug.kuoauth.KuOAuthUser;
-import com.kupug.kuoauth.enums.Gender;
-import com.kupug.kuoauth.enums.Platform;
-import com.kupug.kuoauth.platform.IOAuthUser;
+import com.kupug.kuoauth.model.KuOAuthUser;
+import com.kupug.kuoauth.model.Gender;
+import com.kupug.kuoauth.model.Platform;
 import com.kupug.kuoauth.utils.JsonUtils;
 
 /**
@@ -14,7 +13,7 @@ import com.kupug.kuoauth.utils.JsonUtils;
  * @author MaoHai.LV
  * @since 1.1
  */
-final class OAuthUser implements IOAuthUser {
+final class OAuthUser {
 
     private Integer errorCode;
     private String errorMsg;
@@ -186,7 +185,6 @@ final class OAuthUser implements IOAuthUser {
      *
      * @return KuOAuthUser
      */
-    @Override
     public KuOAuthUser valueOf() {
 
         String avatar = String.format("http://himg.bdimg.com/sys/portrait/item/%s.jpg", this.getPortrait());

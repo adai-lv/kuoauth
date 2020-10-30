@@ -1,7 +1,7 @@
 package com.kupug.kuoauth.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.kupug.kuoauth.KuOAuthToken;
+import com.kupug.kuoauth.model.KuOAuthToken;
 import org.junit.Test;
 
 import java.util.HashMap;

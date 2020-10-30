@@ -1,10 +1,10 @@
 package com.kupug.kuoauth.platform.steam;
 
-import com.kupug.kuoauth.KuOAuthCallback;
-import com.kupug.kuoauth.KuOAuthConfig;
-import com.kupug.kuoauth.KuOAuthLogin;
-import com.kupug.kuoauth.KuOAuthToken;
-import com.kupug.kuoauth.KuOAuthUser;
+import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthConfig;
+import com.kupug.kuoauth.model.KuOAuthLogin;
+import com.kupug.kuoauth.model.KuOAuthToken;
+import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.OAuthConfigTest;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.OAuthUtils;

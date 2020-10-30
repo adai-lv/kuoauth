@@ -1,5 +1,9 @@
 package com.kupug.kuoauth;
 
+import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthLogin;
+import com.kupug.kuoauth.model.KuOAuthToken;
+
 /**
  * <p>
  * 平台授权公共接口，所有平台的都需要实现该接口

@@ -1,10 +1,9 @@
 package com.kupug.kuoauth.platform.steam;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.kupug.kuoauth.KuOAuthUser;
-import com.kupug.kuoauth.enums.Gender;
-import com.kupug.kuoauth.enums.Platform;
-import com.kupug.kuoauth.platform.IOAuthUser;
+import com.kupug.kuoauth.model.KuOAuthUser;
+import com.kupug.kuoauth.model.Gender;
+import com.kupug.kuoauth.model.Platform;
 import com.kupug.kuoauth.utils.JsonUtils;
 
 /**
@@ -15,7 +14,7 @@ import com.kupug.kuoauth.utils.JsonUtils;
  * @author MaoHai.LV
  * @since 1.2
  */
-final class OAuthUser implements IOAuthUser {
+final class OAuthUser {
 
     private String steamId;
     private String personaName;
@@ -149,7 +148,6 @@ final class OAuthUser implements IOAuthUser {
      *
      * @return KuOAuthUser
      */
-    @Override
     public KuOAuthUser valueOf() {
         return KuOAuthUser.builder()
                 .openId(this.getSteamId())

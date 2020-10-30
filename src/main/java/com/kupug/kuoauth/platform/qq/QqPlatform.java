@@ -1,13 +1,13 @@
 package com.kupug.kuoauth.platform.qq;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.kupug.kuoauth.KuOAuthCallback;
-import com.kupug.kuoauth.KuOAuthConfig;
+import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.KuOAuthException;
-import com.kupug.kuoauth.KuOAuthToken;
-import com.kupug.kuoauth.KuOAuthUser;
+import com.kupug.kuoauth.model.KuOAuthToken;
+import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.enums.Separator;
+import com.kupug.kuoauth.model.Separator;
 import com.kupug.kuoauth.utils.HttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.UrlUtils;
@@ -127,7 +127,7 @@ public final class QqPlatform extends OAuthPlatform {
             parseResponse(responseBody);
         }
 
-        Map<String, String> responseMap = UrlUtils.parseStringToMap(responseBody, true);
+        Map<String, String> responseMap = UrlUtils.valueOf(responseBody, true);
 
         return OAuthToken.valueOf(responseMap);
     }

@@ -1,10 +1,10 @@
 package com.kupug.kuoauth.platform.github;
 
-import com.kupug.kuoauth.KuOAuthCallback;
-import com.kupug.kuoauth.KuOAuthConfig;
+import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.KuOAuthException;
-import com.kupug.kuoauth.KuOAuthToken;
-import com.kupug.kuoauth.KuOAuthUser;
+import com.kupug.kuoauth.model.KuOAuthToken;
+import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
 import com.kupug.kuoauth.platform.qq.OAuthScope;
 import com.kupug.kuoauth.utils.HttpClient;
@@ -61,7 +61,7 @@ public final class GithubPlatform extends OAuthPlatform {
                 .timeout(10000)
                 .post();
 
-        Map<String, String> responseMap = UrlUtils.parseStringToMap(responseBody, true);
+        Map<String, String> responseMap = UrlUtils.valueOf(responseBody, true);
 
         if (responseMap.containsKey("error") && responseMap.containsKey("error_description")) {
             throw new KuOAuthException(responseMap.get("error") + ": " + responseMap.get("error_description"));

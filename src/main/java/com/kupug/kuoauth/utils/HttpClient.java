@@ -302,7 +302,7 @@ public final class HttpClient {
          */
         public String build() {
 
-            String paramString = UrlUtils.parseMapToString(this.params, encode);
+            String paramString = UrlUtils.valueOf(this.params, encode);
 
             return UrlUtils.concat(this.url, paramString);
         }
