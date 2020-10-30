@@ -1,6 +1,6 @@
 package com.kupug.kuoauth.utils;
 
-import com.kupug.kuoauth.Constants;
+import com.kupug.kuoauth.model.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

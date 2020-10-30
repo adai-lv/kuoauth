@@ -12,7 +12,6 @@ import com.kupug.kuoauth.platform.google.GooglePlatform;
 import com.kupug.kuoauth.platform.oschina.OschinaPlatform;
 import com.kupug.kuoauth.platform.qq.QqPlatform;
 import com.kupug.kuoauth.platform.steam.SteamPlatform;
-import com.kupug.kuoauth.platform.twitter.TwitterPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatMpPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatOpPlatform;
 import com.kupug.kuoauth.platform.weibo.WeiboPlatform;
@@ -27,7 +26,6 @@ import com.kupug.kuoauth.platform.weibo.WeiboPlatform;
  */
 public enum Platform {
 
-    TWITTER(TwitterPlatform.class, "twitter平台"),
     STEAM(SteamPlatform.class, "steam平台"),
     GOOGLE(GooglePlatform.class, "google平台"),
     FACEBOOK(FacebookPlatform.class, "facebook平台"),

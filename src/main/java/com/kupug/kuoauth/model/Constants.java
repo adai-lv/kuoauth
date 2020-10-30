@@ -1,4 +1,4 @@
-package com.kupug.kuoauth;
+package com.kupug.kuoauth.model;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

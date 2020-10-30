@@ -1,7 +1,7 @@
 package com.kupug.kuoauth.platform.dingtalk;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.kupug.kuoauth.Constants;
+import com.kupug.kuoauth.model.Constants;
 import com.kupug.kuoauth.model.KuOAuthCallback;
 import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.KuOAuthException;
