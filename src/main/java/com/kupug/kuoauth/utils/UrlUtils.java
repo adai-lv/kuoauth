@@ -1,6 +1,6 @@
 package com.kupug.kuoauth.utils;
 
-import com.kupug.kuoauth.Constants;
+import com.kupug.kuoauth.model.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -128,7 +128,7 @@ public final class UrlUtils {
      * @param encode 是否转码
      * @return str
      */
-    public static String parseMapToString(Map<String, String> params, boolean encode) {
+    public static String valueOf(Map<String, String> params, boolean encode) {
 
         if (CollectionUtils.isEmpty(params)) {
             return "";
@@ -153,8 +153,8 @@ public final class UrlUtils {
      * @param params 待转换的map
      * @return str
      */
-    public static String parseMapToString(Map<String, String> params) {
-        return parseMapToString(params, false);
+    public static String valueOf(Map<String, String> params) {
+        return valueOf(params, false);
     }
 
     /**
@@ -164,7 +164,7 @@ public final class UrlUtils {
      * @param decode 是否解码
      * @return map
      */
-    public static Map<String, String> parseStringToMap(String str, boolean decode) {
+    public static Map<String, String> valueOf(String str, boolean decode) {
 
         Map<String, String> params = new HashMap<>();
         if (StringUtils.isEmpty(str)) {
@@ -196,9 +196,8 @@ public final class UrlUtils {
      * @param str 待转换的字符串
      * @return map
      */
-    public static Map<String, String> parseStringToMap(String str) {
-
-        return parseStringToMap(str, false);
+    public static Map<String, String> valueOf(String str) {
+        return valueOf(str, false);
     }
 
     /**

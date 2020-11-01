@@ -1,9 +1,8 @@
 package com.kupug.kuoauth.platform.wechat;
 
-import com.kupug.kuoauth.KuOAuthUser;
-import com.kupug.kuoauth.platform.IOAuthUser;
-import com.kupug.kuoauth.enums.Gender;
-import com.kupug.kuoauth.enums.Platform;
+import com.kupug.kuoauth.model.KuOAuthUser;
+import com.kupug.kuoauth.model.Gender;
+import com.kupug.kuoauth.model.Platform;
 import com.kupug.kuoauth.utils.JsonUtils;
 
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
  * @author MaoHai.LV
  * @since 1.0
  */
-public final class OAuthUser implements IOAuthUser {
+final class OAuthUser {
 
     private String errcode;
     private String errmsg;
@@ -149,7 +148,6 @@ public final class OAuthUser implements IOAuthUser {
      *
      * @return KuOAuthUser
      */
-    @Override
     public KuOAuthUser valueOf() {
 
         String location = String.format("%s-%s-%s", this.getCountry(), this.getProvince(), this.getCity());

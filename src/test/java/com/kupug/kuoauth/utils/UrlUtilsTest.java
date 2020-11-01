@@ -50,11 +50,11 @@ public class UrlUtilsTest {
         params.put("email", "xxx@xxx.com");
         params.put("phone", "1234****345");
 
-        String unEncodeActual = UrlUtils.parseMapToString(params);
+        String unEncodeActual = UrlUtils.valueOf(params);
         String unEncodeExpected = "phone=1234****345&id=1&boy=true&email=xxx@xxx.com";
         Assert.assertEquals("UrlUtils.parseMapToString", unEncodeExpected, unEncodeActual);
 
-        String encodeActual = UrlUtils.parseMapToString(params, true);
+        String encodeActual = UrlUtils.valueOf(params, true);
         String encodeExpected = "phone=1234%2A%2A%2A%2A345&id=1&boy=true&email=xxx%40xxx.com";
         Assert.assertEquals("UrlUtils.parseMapToString", encodeExpected, encodeActual);
     }
@@ -64,11 +64,11 @@ public class UrlUtilsTest {
 
         String paramsStr = "phone=1234%2A%2A%2A%2A345&id=1&boy=true&email=xxx%40xxx.com";
 
-        Map<String, String> unDecodeActual = UrlUtils.parseStringToMap(paramsStr);
+        Map<String, String> unDecodeActual = UrlUtils.valueOf(paramsStr);
         String unDecodeExpected = "{\"phone\":\"1234%2A%2A%2A%2A345\",\"id\":\"1\",\"boy\":\"true\",\"email\":\"xxx%40xxx.com\"}";
         Assert.assertEquals("UrlUtils.parseStringToMap", unDecodeExpected, JsonUtils.toJSONString(unDecodeActual));
 
-        Map<String, String> decodeActual = UrlUtils.parseStringToMap(paramsStr, true);
+        Map<String, String> decodeActual = UrlUtils.valueOf(paramsStr, true);
         String decodeExpected = "{\"phone\":\"1234****345\",\"id\":\"1\",\"boy\":\"true\",\"email\":\"xxx@xxx.com\"}";
         Assert.assertEquals("UrlUtils.parseStringToMap", decodeExpected, JsonUtils.toJSONString(decodeActual));
     }

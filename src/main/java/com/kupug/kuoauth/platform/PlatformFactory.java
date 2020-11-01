@@ -1,9 +1,9 @@
 package com.kupug.kuoauth.platform;
 
-import com.kupug.kuoauth.KuOAuthConfig;
+import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.KuOAuthPlatform;
-import com.kupug.kuoauth.enums.Platform;
+import com.kupug.kuoauth.model.Platform;
 
 import java.lang.reflect.Constructor;
 

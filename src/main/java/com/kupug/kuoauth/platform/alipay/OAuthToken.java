@@ -1,8 +1,7 @@
 package com.kupug.kuoauth.platform.alipay;
 
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
-import com.kupug.kuoauth.KuOAuthToken;
-import com.kupug.kuoauth.platform.IOAuthToken;
+import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.utils.JsonUtils;
 
 /**
@@ -13,7 +12,7 @@ import com.kupug.kuoauth.utils.JsonUtils;
  * @author MaoHai.LV
  * @since 1.1
  */
-public final class OAuthToken implements IOAuthToken {
+final class OAuthToken {
 
     private String accessToken;
     private String refreshToken;
@@ -87,7 +86,6 @@ public final class OAuthToken implements IOAuthToken {
      *
      * @return KuOAuthToken对象
      */
-    @Override
     public KuOAuthToken valueOf() {
         return KuOAuthToken.builder()
                 .accessToken(this.getAccessToken())

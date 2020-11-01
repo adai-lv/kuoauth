@@ -1,9 +1,8 @@
 package com.kupug.kuoauth.platform.google;
 
-import com.kupug.kuoauth.KuOAuthUser;
-import com.kupug.kuoauth.platform.IOAuthUser;
-import com.kupug.kuoauth.enums.Gender;
-import com.kupug.kuoauth.enums.Platform;
+import com.kupug.kuoauth.model.KuOAuthUser;
+import com.kupug.kuoauth.model.Gender;
+import com.kupug.kuoauth.model.Platform;
 import com.kupug.kuoauth.utils.JsonUtils;
 
 /**
@@ -14,7 +13,7 @@ import com.kupug.kuoauth.utils.JsonUtils;
  * @author MaoHai.LV
  * @since 1.1
  */
-public final class OAuthUser implements IOAuthUser {
+final class OAuthUser {
 
     private String error;
     private String errorDescription;
@@ -97,7 +96,6 @@ public final class OAuthUser implements IOAuthUser {
      *
      * @return KuOAuthUser
      */
-    @Override
     public KuOAuthUser valueOf() {
 
         return KuOAuthUser.builder()

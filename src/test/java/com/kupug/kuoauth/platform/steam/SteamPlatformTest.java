@@ -1,35 +1,36 @@
-package com.kupug.kuoauth.platform.facebook;
+package com.kupug.kuoauth.platform.steam;
 
-import com.kupug.kuoauth.model.KuOAuthConfig;
-import com.kupug.kuoauth.OAuthConfigTest;
 import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.model.KuOAuthLogin;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
+import com.kupug.kuoauth.OAuthConfigTest;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.OAuthUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FacebookPlatformTest {
+public class SteamPlatformTest {
 
-    private FacebookPlatform platform;
+    private SteamPlatform platform;
 
     @Before
     public void init() {
 
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
-                .clientId(OAuthConfigTest.FACEBOOK_CLIENTID)
-                .clientSecret(OAuthConfigTest.FACEBOOK_CLIENTSECRET)
-                .redirectUri(OAuthConfigTest.FACEBOOK_REDIRECTURI)
+                .clientId(OAuthConfigTest.STEAM_CLIENTID)
+                .clientSecret(OAuthConfigTest.STEAM_CLIENTSECRET)
+                .redirectUri(OAuthConfigTest.STEAM_REDIRECTURI)
                 .build();
 
-        platform = new FacebookPlatform(kuOAuthConfig);
+        platform = new SteamPlatform(kuOAuthConfig);
     }
 
     @Test
     public void authorize() {
         String authorizeUrl = platform.authorize(OAuthUtils.randomState());
+
         System.out.println(authorizeUrl);
     }
 
@@ -37,8 +38,8 @@ public class FacebookPlatformTest {
     public void accessToken() {
 
         KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
-                .code("4/0AfDhmrjxK16Q_EddRUMj5Gb93iXozDDaPUEuQQnW_3IUvo_HN_QwplpmJJPxcPR_wriWxA")
-                .state("b2cc9139ce1723ea8e0f12f27f56b0b3")
+                .code("https://steamcommunity.com/openid/id/76561199102355582")
+                .state("409edd713ff75da5f8c3c8cafb37cecd")
                 .build();
 
         KuOAuthToken oAuthToken = platform.getAccessToken(oAuthCallback);
@@ -50,7 +51,7 @@ public class FacebookPlatformTest {
     public void userInfo() {
 
         KuOAuthToken oAuthToken = KuOAuthToken.builder()
-                .accessToken("933fbfbd9975d6f33ef42bc4b0336e0e32664f2d3")
+                .openId("765611991023555823")
                 .build();
 
         KuOAuthUser oAuthUser = platform.getUserInfo(oAuthToken);
@@ -62,8 +63,8 @@ public class FacebookPlatformTest {
     public void login() {
 
         KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
-                .code("7cbbc5c765ec885f0d4a")
-                .state("b73455ac3dfbc6f129e99a9b88068ad2")
+                .code("https://steamcommunity.com/openid/id/76561199102355582")
+                .state("95e7ab5eb20186211b2fec71851291c3")
                 .build();
 
         KuOAuthLogin oAuthLogin = platform.login(oAuthCallback);

@@ -1,4 +1,4 @@
-package com.kupug.kuoauth.enums;
+package com.kupug.kuoauth.model;
 
 /**
  * <p>

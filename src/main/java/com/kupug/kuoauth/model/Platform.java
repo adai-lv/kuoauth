@@ -1,4 +1,4 @@
-package com.kupug.kuoauth.enums;
+package com.kupug.kuoauth.model;
 
 import com.kupug.kuoauth.KuOAuthPlatform;
 import com.kupug.kuoauth.platform.alipay.AlipayPlatform;
@@ -11,6 +11,7 @@ import com.kupug.kuoauth.platform.github.GithubPlatform;
 import com.kupug.kuoauth.platform.google.GooglePlatform;
 import com.kupug.kuoauth.platform.oschina.OschinaPlatform;
 import com.kupug.kuoauth.platform.qq.QqPlatform;
+import com.kupug.kuoauth.platform.steam.SteamPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatMpPlatform;
 import com.kupug.kuoauth.platform.wechat.WechatOpPlatform;
 import com.kupug.kuoauth.platform.weibo.WeiboPlatform;
@@ -25,6 +26,7 @@ import com.kupug.kuoauth.platform.weibo.WeiboPlatform;
  */
 public enum Platform {
 
+    STEAM(SteamPlatform.class, "steam平台"),
     GOOGLE(GooglePlatform.class, "google平台"),
     FACEBOOK(FacebookPlatform.class, "facebook平台"),
     BAIDU(BaiduPlatform.class, "百度平台"),

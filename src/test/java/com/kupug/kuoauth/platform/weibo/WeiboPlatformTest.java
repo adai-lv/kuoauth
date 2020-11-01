@@ -1,13 +1,13 @@
 package com.kupug.kuoauth.platform.weibo;
 
-import com.kupug.kuoauth.KuOAuthCallback;
-import com.kupug.kuoauth.KuOAuthConfig;
-import com.kupug.kuoauth.KuOAuthLogin;
-import com.kupug.kuoauth.KuOAuthToken;
-import com.kupug.kuoauth.KuOAuthUser;
+import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthConfig;
+import com.kupug.kuoauth.model.KuOAuthLogin;
+import com.kupug.kuoauth.model.KuOAuthToken;
+import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.OAuthConfigTest;
 import com.kupug.kuoauth.platform.PlatformFactory;
-import com.kupug.kuoauth.enums.Platform;
+import com.kupug.kuoauth.model.Platform;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.OAuthUtils;
 import org.junit.Before;

@@ -1,4 +1,6 @@
-package com.kupug.kuoauth;
+package com.kupug.kuoauth.model;
+
+import com.kupug.kuoauth.utils.StringUtils;
 
 /**
  * <p>
@@ -41,12 +43,12 @@ public final class KuOAuthToken {
     }
 
     private KuOAuthToken(Builder builder) {
-        this.accessToken = builder.accessToken;
-        this.refreshToken = builder.refreshToken;
+        this.accessToken = format(builder.accessToken);
+        this.refreshToken = format(builder.refreshToken);
         this.expiresIn = builder.expiresIn;
-        this.rawInfo = builder.rawInfo;
-        this.openId = builder.openId;
-        this.unionId = builder.unionId;
+        this.rawInfo = format(builder.rawInfo);
+        this.openId = format(builder.openId);
+        this.unionId = format(builder.unionId);
     }
 
     public String getAccessToken() {
@@ -71,6 +73,10 @@ public final class KuOAuthToken {
 
     public String getUnionId() {
         return unionId;
+    }
+
+    private String format(String rawValue) {
+        return StringUtils.isEmpty(rawValue) ? "" : rawValue;
     }
 
     @Override
@@ -106,7 +112,7 @@ public final class KuOAuthToken {
 
         private String accessToken;
         private String refreshToken;
-        private Integer expiresIn;
+        private int expiresIn;
         private String rawInfo;
         private String openId;
         private String unionId;
@@ -121,7 +127,7 @@ public final class KuOAuthToken {
             return this;
         }
 
-        public Builder expiresIn(Integer expiresIn) {
+        public Builder expiresIn(int expiresIn) {
             this.expiresIn = expiresIn;
             return this;
         }

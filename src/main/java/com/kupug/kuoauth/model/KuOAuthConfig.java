@@ -1,4 +1,4 @@
-package com.kupug.kuoauth;
+package com.kupug.kuoauth.model;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public final class KuOAuthConfig {
      * <strong>如非特殊需要，不建议开启这个配置</strong>
      * <p>
      */
-    private Boolean ignoreCheckState;
+    private boolean ignoreCheckState;
 
     /**
      * 定义授权平台的 scope 内容
@@ -85,7 +85,7 @@ public final class KuOAuthConfig {
         return redirectUri;
     }
 
-    public Boolean isIgnoreCheckState() {
+    public boolean isIgnoreCheckState() {
         return ignoreCheckState;
     }
 
@@ -93,7 +93,7 @@ public final class KuOAuthConfig {
         return scopes;
     }
 
-    public Boolean isUnionId() {
+    public boolean isUnionId() {
         return unionId;
     }
 

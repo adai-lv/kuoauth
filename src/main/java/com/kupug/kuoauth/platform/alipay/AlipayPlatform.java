@@ -7,12 +7,12 @@ import com.alipay.api.request.AlipaySystemOauthTokenRequest;
 import com.alipay.api.request.AlipayUserInfoShareRequest;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.api.response.AlipayUserInfoShareResponse;
-import com.kupug.kuoauth.Constants;
-import com.kupug.kuoauth.KuOAuthCallback;
-import com.kupug.kuoauth.KuOAuthConfig;
+import com.kupug.kuoauth.model.Constants;
+import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.KuOAuthException;
-import com.kupug.kuoauth.KuOAuthToken;
-import com.kupug.kuoauth.KuOAuthUser;
+import com.kupug.kuoauth.model.KuOAuthToken;
+import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
 import com.kupug.kuoauth.utils.HttpClient;
 
