@@ -5,7 +5,6 @@ import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.platform.qq.OAuthScope;
 import com.kupug.kuoauth.utils.HttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 

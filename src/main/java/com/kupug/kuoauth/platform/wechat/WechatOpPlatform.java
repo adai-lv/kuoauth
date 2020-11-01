@@ -1,7 +1,6 @@
 package com.kupug.kuoauth.platform.wechat;
 
 import com.kupug.kuoauth.model.KuOAuthConfig;
-import com.kupug.kuoauth.platform.weibo.OAuthScope;
 
 /**
  * <p>
@@ -16,6 +15,6 @@ public final class WechatOpPlatform extends WechatPlatform {
     public WechatOpPlatform(KuOAuthConfig config) {
         super(config);
         this.oAuthApi = OAuthApi.OPEN_PLATFORM;
-        this.oAuthScopes = OAuthScope.values();
+        this.oAuthScopes = OpOAuthScope.values();
     }
 }

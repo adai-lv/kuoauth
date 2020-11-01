@@ -49,7 +49,7 @@ KuOAuthConfig config = KuOAuthConfig.builder()
     .build();
 
 // 创建 OAuth 平台对象
-KuOAuthPlatform platform = PlatformFactory.newInstance(Platform.QQ, kuOAuthConfig);
+KuOAuthPlatform platform = PlatformFactory.newInstance(Platform.QQ, config);
 
 // 构建 OAuth 授权页面 URL
 String authorizeUrl = platform.authorize("state");
