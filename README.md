@@ -39,6 +39,8 @@
 
 - 调用服务 API
 
+未启用 HttpProxy 的伪代码
+ 
 ```
 // 构建 OAuth 平台配置
 // 可以重置授权 scope 的值，具体信息可以参考: com.kupug.kuoauth.platform.IOAuthScope 的实现类
@@ -65,7 +67,37 @@ KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
 KuOAuthLogin oAuthLogin = platform.login(oAuthCallback);
 ```
 
+启用 HttpProxy 的伪代码
+```
+// Http proxy config
+HttpConfig httpConfig = HttpConfig.builder()
+    .timeout(30000)
+    .proxy("127.0.0.1", 1081)
+    .build();
+
+// 构建 OAuth 平台配置
+KuOAuthConfig config = KuOAuthConfig.builder()
+    .clientId("clientId")
+    .clientSecret("clientSecret")
+    .redirectUri("redirectUri")
+    .httpConfig(httpConfig)
+    .build();
+
+KuOAuthPlatform platform = PlatformFactory.newInstance(Platform.GOOGLE, config);
+
+String authorizeUrl = platform.authorize("state");
+
+KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
+    .code("authorize code")
+    .state("authorize state")
+    .build();
+KuOAuthLogin oAuthLogin = platform.login(oAuthCallback);
+```
+
 ### 版本迭代
+
+#### v1.3 2020-11-02
+- feat: 增加 Http Proxy 配置，针对国外平台做代理
 
 #### v1.2 2020-10-29
 - feat: steam 平台授权登录功能逻辑开发

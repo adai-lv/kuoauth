@@ -1,21 +1,26 @@
 package com.kupug.kuoauth.platform;
 
+import com.kupug.kuoauth.KuOAuthException;
+import com.kupug.kuoauth.KuOAuthPlatform;
+import com.kupug.kuoauth.model.HttpConfig;
 import com.kupug.kuoauth.model.KuOAuthCallback;
 import com.kupug.kuoauth.model.KuOAuthConfig;
-import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthLogin;
-import com.kupug.kuoauth.KuOAuthPlatform;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.model.Separator;
 import com.kupug.kuoauth.utils.CollectionUtils;
+import com.kupug.kuoauth.utils.HttpClient;
 import com.kupug.kuoauth.utils.OAuthUtils;
 import com.kupug.kuoauth.utils.StringUtils;
 import com.kupug.kuoauth.utils.UrlUtils;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -144,6 +149,26 @@ public abstract class OAuthPlatform implements KuOAuthPlatform {
         if (StringUtils.isEmpty(authCallback.getCode())) {
             throw new KuOAuthException("Illegal OAuth code");
         }
+    }
+
+    /**
+     * 包装 http proxy
+     *
+     * @param builder http client builder
+     * @return HttpClient.Builder
+     */
+    protected HttpClient.Builder wrapHttpProxy(HttpClient.Builder builder) {
+
+        HttpConfig httpConfig = config.getHttpConfig();
+        if (Objects.nonNull(httpConfig)) {
+            InetSocketAddress inetSocketAddress = new InetSocketAddress(httpConfig.getProxyHost(), httpConfig.getProxyPort());
+            return builder.connectTimeout(httpConfig.getConnectTimeout())
+                    .readTimeout(httpConfig.getReadTimeout())
+                    .writeTimeout(httpConfig.getWriteTimeout())
+                    .proxy(new Proxy(Proxy.Type.HTTP, inetSocketAddress));
+        }
+
+        return builder;
     }
 
     /**

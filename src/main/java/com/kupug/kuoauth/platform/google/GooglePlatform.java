@@ -2,14 +2,11 @@ package com.kupug.kuoauth.platform.google;
 
 import com.kupug.kuoauth.model.KuOAuthCallback;
 import com.kupug.kuoauth.model.KuOAuthConfig;
-import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
 import com.kupug.kuoauth.utils.HttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
-
-import java.util.Objects;
 
 /**
  * <p>
@@ -50,40 +47,31 @@ public final class GooglePlatform extends OAuthPlatform {
     @Override
     protected KuOAuthToken getAccessToken(KuOAuthCallback authCallback) {
 
-        String responseBody = HttpClient.builder()
+        HttpClient.Builder builder = HttpClient.builder()
                 .fromUrl(oAuthApi.accessToken())
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", authCallback.getCode())
                 .queryParam("client_id", config.getClientId())
                 .queryParam("client_secret", config.getClientSecret())
-                .queryParam("redirect_uri", config.getRedirectUri())
-                .post();
+                .queryParam("redirect_uri", config.getRedirectUri());
+
+        String responseBody = wrapHttpProxy(builder).post();
 
         OAuthToken oAuthToken = JsonUtils.parseObject(responseBody, OAuthToken.class);
-
-        if (Objects.nonNull(oAuthToken.getError())) {
-            throw new KuOAuthException(String.format("[%s]%s",
-                    oAuthToken.getError(), oAuthToken.getErrorDescription()));
-        }
 
         return oAuthToken.valueOf();
     }
 
     @Override
     protected KuOAuthUser getUserInfo(KuOAuthToken authToken) {
-
-        String responseBody = HttpClient.builder()
+        HttpClient.Builder builder = HttpClient.builder()
                 .fromUrl(oAuthApi.userInfo())
                 .addHeader("Authorization", "Bearer " + authToken.getAccessToken())
-                .queryParam("access_token", authToken.getAccessToken())
-                .post();
+                .queryParam("access_token", authToken.getAccessToken());
+
+        String responseBody = wrapHttpProxy(builder).post();
 
         OAuthUser oAuthUser = JsonUtils.parseObject(responseBody, OAuthUser.class);
-
-        if (Objects.nonNull(oAuthUser.getError())) {
-            throw new KuOAuthException(String.format("[%s]%s",
-                    oAuthUser.getError(), oAuthUser.getErrorDescription()));
-        }
 
         return oAuthUser.valueOf();
     }

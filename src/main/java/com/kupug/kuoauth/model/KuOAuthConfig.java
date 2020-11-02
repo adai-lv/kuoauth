@@ -63,7 +63,13 @@ public final class KuOAuthConfig {
      */
     private String alipayPublicKey;
 
-    public KuOAuthConfig(Builder builder) {
+    /**
+     * 设置 http 请求参数：超时时间（连接、读写）、是否启用http 代理
+     * 主要是用于访问国外平台
+     */
+    private HttpConfig httpConfig;
+
+    private KuOAuthConfig(Builder builder) {
         this.clientId = builder.clientId;
         this.clientSecret = builder.clientSecret;
         this.redirectUri = builder.redirectUri;
@@ -71,6 +77,7 @@ public final class KuOAuthConfig {
         this.scopes = builder.scopes;
         this.unionId = builder.unionId;
         this.alipayPublicKey = builder.alipayPublicKey;
+        this.httpConfig = builder.httpConfig;
     }
 
     public String getClientId() {
@@ -101,15 +108,21 @@ public final class KuOAuthConfig {
         return alipayPublicKey;
     }
 
+    public HttpConfig getHttpConfig() {
+        return httpConfig;
+    }
+
     @Override
     public String toString() {
         return "KuOAuthConfig{" +
-                ", clientId='" + clientId + '\'' +
+                "clientId='" + clientId + '\'' +
                 ", clientSecret='" + clientSecret + '\'' +
                 ", redirectUri='" + redirectUri + '\'' +
                 ", ignoreCheckState=" + ignoreCheckState +
                 ", scopes=" + scopes +
                 ", unionId=" + unionId +
+                ", alipayPublicKey='" + alipayPublicKey + '\'' +
+                ", httpConfig=" + httpConfig +
                 '}';
     }
 
@@ -125,6 +138,7 @@ public final class KuOAuthConfig {
         private List<String> scopes;
         private boolean unionId;
         private String alipayPublicKey;
+        private HttpConfig httpConfig;
 
         public Builder clientId(String clientId) {
             this.clientId = clientId;
@@ -158,6 +172,11 @@ public final class KuOAuthConfig {
 
         public Builder alipayPublicKey(String alipayPublicKey) {
             this.alipayPublicKey = alipayPublicKey;
+            return this;
+        }
+
+        public Builder httpConfig(HttpConfig httpConfig) {
+            this.httpConfig = httpConfig;
             return this;
         }
 
