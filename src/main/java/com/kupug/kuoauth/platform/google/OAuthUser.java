@@ -15,30 +15,13 @@ import com.kupug.kuoauth.utils.JsonUtils;
  */
 final class OAuthUser {
 
-    private String error;
-    private String errorDescription;
-
     private String sub;
     private String name;
+    private String givenName;
+    private String familyName;
     private String email;
     private String picture;
     private String locale;
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public String getErrorDescription() {
-        return errorDescription;
-    }
-
-    public void setErrorDescription(String errorDescription) {
-        this.errorDescription = errorDescription;
-    }
 
     public String getSub() {
         return sub;
@@ -54,6 +37,22 @@ final class OAuthUser {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGivenName() {
+        return givenName;
+    }
+
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
     public String getEmail() {
@@ -85,6 +84,8 @@ final class OAuthUser {
         return "OAuthUser{" +
                 "sub='" + sub + '\'' +
                 ", name='" + name + '\'' +
+                ", givenName='" + givenName + '\'' +
+                ", familyName='" + familyName + '\'' +
                 ", email='" + email + '\'' +
                 ", picture='" + picture + '\'' +
                 ", locale='" + locale + '\'' +

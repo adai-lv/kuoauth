@@ -1,5 +1,6 @@
 package com.kupug.kuoauth.platform.google;
 
+import com.kupug.kuoauth.model.HttpConfig;
 import com.kupug.kuoauth.model.KuOAuthCallback;
 import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.model.KuOAuthLogin;
@@ -18,10 +19,16 @@ public class GooglePlatformTest {
     @Before
     public void init() {
 
+        HttpConfig httpConfig = HttpConfig.builder()
+                .timeout(30000)
+                .proxy("127.0.0.1", 1081)
+                .build();
+
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
                 .clientId(OAuthConfigTest.GOOGLE_CLIENTID)
                 .clientSecret(OAuthConfigTest.GOOGLE_CLIENTSECRET)
                 .redirectUri(OAuthConfigTest.GOOGLE_REDIRECTURI)
+                .httpConfig(httpConfig)
                 .build();
 
         platform = new GooglePlatform(kuOAuthConfig);
@@ -37,8 +44,8 @@ public class GooglePlatformTest {
     public void accessToken() {
 
         KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
-                .code("4/0AfDhmrg0zb8k2h-q_z3Wh-sYKlwL3MAftkrAzAjskpcMeb91cp10yWqjgCOx0CnSvdV7EQ")
-                .state("19c5f628af43e7577d2cea0c34280683")
+                .code("4/0AfDhmrhUlfqGTgxGX_IbNxVoKUpwQGr84dILFrWFtiWGTOTF0-oscUZB_sLRbR2af7Zonw")
+                .state("1494c60c57b986376c506863e6c9e803")
                 .build();
 
         KuOAuthToken oAuthToken = platform.getAccessToken(oAuthCallback);
@@ -50,7 +57,9 @@ public class GooglePlatformTest {
     public void userInfo() {
 
         KuOAuthToken oAuthToken = KuOAuthToken.builder()
-                .accessToken("933fbfbd9975d6f33ef42bc4b0336e0e32664f2d3")
+                .accessToken("ya29.a0AfH6SMB87flrJRy4q4V1bG97NGtPBLsGe_gbf8b3ESjysqdsLov0-18MEW2JVRwiknHm1td4YkOhol4om7-HFtqW-VYVVlwOrUmqb1nyCbxqaZ4UYFipdooLHg3sq3wYkRGbnGRut3Jgg6frTZdN5t_bmvAKod8TpJk")
+                .refreshToken("")
+                .expiresIn(3599)
                 .build();
 
         KuOAuthUser oAuthUser = platform.getUserInfo(oAuthToken);

@@ -47,14 +47,15 @@ public final class FacebookPlatform extends OAuthPlatform {
     @Override
     protected KuOAuthToken getAccessToken(KuOAuthCallback authCallback) {
 
-        String responseBody = HttpClient.builder()
+        HttpClient.Builder builder = HttpClient.builder()
                 .fromUrl(oAuthApi.accessToken())
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", authCallback.getCode())
                 .queryParam("client_id", config.getClientId())
                 .queryParam("client_secret", config.getClientSecret())
-                .queryParam("redirect_uri", config.getRedirectUri())
-                .post();
+                .queryParam("redirect_uri", config.getRedirectUri());
+
+        String responseBody = wrapHttpProxy(builder).post();
 
         checkResponse(responseBody);
 
@@ -66,11 +67,12 @@ public final class FacebookPlatform extends OAuthPlatform {
     @Override
     protected KuOAuthUser getUserInfo(KuOAuthToken authToken) {
 
-        String responseBody = HttpClient.builder()
+        HttpClient.Builder builder = HttpClient.builder()
                 .fromUrl(oAuthApi.userInfo())
                 .queryParam("access_token", authToken.getAccessToken())
-                .queryParam("fields", "id,name,birthday,gender,hometown,email,devices,picture.width(400),link")
-                .get();
+                .queryParam("fields", "id,name,birthday,gender,hometown,email,devices,picture.width(400),link");
+
+        String responseBody = wrapHttpProxy(builder).get();
 
         checkResponse(responseBody);
 

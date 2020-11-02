@@ -1,8 +1,9 @@
 package com.kupug.kuoauth.platform.facebook;
 
-import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.OAuthConfigTest;
+import com.kupug.kuoauth.model.HttpConfig;
 import com.kupug.kuoauth.model.KuOAuthCallback;
+import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.model.KuOAuthLogin;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
@@ -18,10 +19,16 @@ public class FacebookPlatformTest {
     @Before
     public void init() {
 
+        HttpConfig httpConfig = HttpConfig.builder()
+                .timeout(30000)
+                .proxy("127.0.0.1", 1081)
+                .build();
+
         KuOAuthConfig kuOAuthConfig = KuOAuthConfig.builder()
                 .clientId(OAuthConfigTest.FACEBOOK_CLIENTID)
                 .clientSecret(OAuthConfigTest.FACEBOOK_CLIENTSECRET)
                 .redirectUri(OAuthConfigTest.FACEBOOK_REDIRECTURI)
+                .httpConfig(httpConfig)
                 .build();
 
         platform = new FacebookPlatform(kuOAuthConfig);
