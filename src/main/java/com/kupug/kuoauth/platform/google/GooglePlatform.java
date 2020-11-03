@@ -5,7 +5,7 @@ import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.utils.HttpClient;
+import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 
 /**
@@ -32,7 +32,7 @@ public final class GooglePlatform extends OAuthPlatform {
      */
     @Override
     public String authorize(String state) {
-        return HttpClient.builder()
+        return KuHttpClient.builder()
                 .fromUrl(oAuthApi.authorize())
                 .queryParam("response_type", "code")
                 .queryParam("client_id", config.getClientId())
@@ -47,15 +47,14 @@ public final class GooglePlatform extends OAuthPlatform {
     @Override
     protected KuOAuthToken getAccessToken(KuOAuthCallback authCallback) {
 
-        HttpClient.Builder builder = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.accessToken())
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", authCallback.getCode())
                 .queryParam("client_id", config.getClientId())
                 .queryParam("client_secret", config.getClientSecret())
-                .queryParam("redirect_uri", config.getRedirectUri());
-
-        String responseBody = wrapHttpProxy(builder).post();
+                .queryParam("redirect_uri", config.getRedirectUri())
+                .post();
 
         OAuthToken oAuthToken = JsonUtils.parseObject(responseBody, OAuthToken.class);
 
@@ -64,12 +63,11 @@ public final class GooglePlatform extends OAuthPlatform {
 
     @Override
     protected KuOAuthUser getUserInfo(KuOAuthToken authToken) {
-        HttpClient.Builder builder = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.userInfo())
                 .addHeader("Authorization", "Bearer " + authToken.getAccessToken())
-                .queryParam("access_token", authToken.getAccessToken());
-
-        String responseBody = wrapHttpProxy(builder).post();
+                .queryParam("access_token", authToken.getAccessToken())
+                .post();
 
         OAuthUser oAuthUser = JsonUtils.parseObject(responseBody, OAuthUser.class);
 

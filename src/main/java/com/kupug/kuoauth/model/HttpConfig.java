@@ -11,19 +11,9 @@ package com.kupug.kuoauth.model;
 public final class HttpConfig {
 
     /**
-     * 连接超时时长，单位毫秒
+     * 超时时长，单位毫秒
      */
-    private long connectTimeout;
-
-    /**
-     * 读数据超时时长，单位毫秒
-     */
-    private long readTimeout;
-
-    /**
-     * 写数据超时时长，单位毫秒
-     */
-    private long writeTimeout;
+    private long timeout;
 
     /**
      * 代理 host
@@ -35,16 +25,8 @@ public final class HttpConfig {
      */
     private Integer proxyPort;
 
-    public long getConnectTimeout() {
-        return connectTimeout;
-    }
-
-    public long getReadTimeout() {
-        return readTimeout;
-    }
-
-    public long getWriteTimeout() {
-        return writeTimeout;
+    public long getTimeout() {
+        return timeout;
     }
 
     public String getProxyHost() {
@@ -58,9 +40,7 @@ public final class HttpConfig {
     private HttpConfig(Builder builder) {
         this.proxyHost = builder.proxyHost;
         this.proxyPort = builder.proxyPort;
-        this.connectTimeout = builder.connectTimeout;
-        this.writeTimeout = builder.writeTimeout;
-        this.readTimeout = builder.readTimeout;
+        this.timeout = builder.timeout;
     }
 
     public static Builder builder() {
@@ -68,9 +48,7 @@ public final class HttpConfig {
     }
 
     public final static class Builder {
-        private long connectTimeout;
-        private long readTimeout;
-        private long writeTimeout;
+        private long timeout;
         private String proxyHost;
         private Integer proxyPort;
 
@@ -88,27 +66,7 @@ public final class HttpConfig {
          * @return Builder
          */
         public Builder timeout(long timeoutMillis) {
-            this.connectTimeout = timeoutMillis;
-            this.readTimeout = timeoutMillis;
-            this.writeTimeout = timeoutMillis;
-
-            return this;
-        }
-
-        public Builder connectTimeout(long milliseconds) {
-            this.connectTimeout = milliseconds;
-
-            return this;
-        }
-
-        public Builder readTimeout(long milliseconds) {
-            this.readTimeout = milliseconds;
-
-            return this;
-        }
-
-        public Builder writeTimeout(long milliseconds) {
-            this.writeTimeout = milliseconds;
+            this.timeout = timeoutMillis;
 
             return this;
         }

@@ -8,7 +8,7 @@ import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
 import com.kupug.kuoauth.model.Separator;
-import com.kupug.kuoauth.utils.HttpClient;
+import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.UrlUtils;
 
@@ -39,7 +39,7 @@ public final class QqPlatform extends OAuthPlatform {
     @Override
     public String authorize(String state) {
 
-        return HttpClient.builder()
+        return KuHttpClient.builder()
                 .fromUrl(oAuthApi.authorize())
                 .queryParam("response_type", "code")
                 .queryParam("client_id", config.getClientId())
@@ -52,7 +52,7 @@ public final class QqPlatform extends OAuthPlatform {
     @Override
     public KuOAuthToken refresh(KuOAuthToken authToken) {
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.refresh())
                 .queryParam("client_id", config.getClientId())
                 .queryParam("client_secret", config.getClientSecret())
@@ -77,7 +77,7 @@ public final class QqPlatform extends OAuthPlatform {
     @Override
     protected KuOAuthToken getAccessToken(KuOAuthCallback authCallback) {
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.accessToken())
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", authCallback.getCode())
@@ -100,7 +100,7 @@ public final class QqPlatform extends OAuthPlatform {
 
         authToken = getOpenId(authToken);
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.userInfo())
                 .queryParam("access_token", authToken.getAccessToken())
                 .queryParam("oauth_consumer_key", config.getClientId())
@@ -143,7 +143,7 @@ public final class QqPlatform extends OAuthPlatform {
 
         int bindUnionId = config.isUnionId() ? 1 : 0;
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.openId())
                 .queryParam("access_token", authToken.getAccessToken())
                 .queryParam("unionid", bindUnionId)

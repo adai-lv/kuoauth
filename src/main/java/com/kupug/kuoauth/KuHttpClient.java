@@ -1,6 +1,9 @@
-package com.kupug.kuoauth.utils;
+package com.kupug.kuoauth;
 
-import com.kupug.kuoauth.KuOAuthException;
+import com.kupug.kuoauth.utils.CollectionUtils;
+import com.kupug.kuoauth.utils.JsonUtils;
+import com.kupug.kuoauth.utils.StringUtils;
+import com.kupug.kuoauth.utils.UrlUtils;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
@@ -12,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -27,9 +31,9 @@ import java.util.concurrent.TimeUnit;
  * @author MaoHai.LV
  * @since 1.0
  */
-public final class HttpClient {
+public final class KuHttpClient {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(KuHttpClient.class);
 
     /**
      * 连接超时，单位毫秒
@@ -73,10 +77,10 @@ public final class HttpClient {
      */
     private long writeTimeout;
 
-    private HttpClient() {
+    private KuHttpClient() {
     }
 
-    private HttpClient(Builder builder) {
+    private KuHttpClient(Builder builder) {
         this.proxy = builder.proxy;
         this.encode = builder.encode;
 
@@ -90,7 +94,7 @@ public final class HttpClient {
      * @param params 参数
      * @return 结果
      */
-    public String get(String url, Map<String, String> params, Map<String, String> headers) {
+    private String get(String url, Map<String, String> params, Map<String, String> headers) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
         if (CollectionUtils.isNotEmpty(params)) {
             if (encode) {
@@ -118,7 +122,7 @@ public final class HttpClient {
      * @param data JSON 参数
      * @return 结果
      */
-    public String post(String url, String data, Map<String, String> headers) {
+    private String post(String url, String data, Map<String, String> headers) {
         if (StringUtils.isEmpty(data)) {
             data = "";
         }
@@ -141,7 +145,7 @@ public final class HttpClient {
      * @param params form 参数
      * @return 结果
      */
-    public String post(String url, Map<String, String> params, Map<String, String> headers) {
+    private String post(String url, Map<String, String> params, Map<String, String> headers) {
         FormBody.Builder formBuilder = new FormBody.Builder();
         if (CollectionUtils.isNotEmpty(params)) {
             if (encode) {
@@ -209,7 +213,7 @@ public final class HttpClient {
     }
 
     public static Builder builder() {
-        return new HttpClient.Builder();
+        return new KuHttpClient.Builder();
     }
 
     public final static class Builder {
@@ -257,8 +261,13 @@ public final class HttpClient {
             return this;
         }
 
-        public Builder proxy(Proxy proxy) {
-            this.proxy = proxy;
+        public Builder proxy(String host, Integer port) {
+
+            if (StringUtils.isNotEmpty(host) && Objects.nonNull(port)) {
+
+                InetSocketAddress inetSocketAddress = new InetSocketAddress(host, port);
+                this.proxy = new Proxy(Proxy.Type.HTTP, inetSocketAddress);
+            }
 
             return this;
         }
@@ -308,11 +317,11 @@ public final class HttpClient {
         }
 
         public String get() {
-            return new HttpClient(this).get(url, params, headers);
+            return new KuHttpClient(this).get(url, params, headers);
         }
 
         public String post() {
-            HttpClient httpClient = new HttpClient(this);
+            KuHttpClient httpClient = new KuHttpClient(this);
 
             if (requestBody) {
                 String data = null;

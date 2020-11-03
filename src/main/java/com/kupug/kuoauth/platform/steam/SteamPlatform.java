@@ -7,7 +7,7 @@ import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.utils.HttpClient;
+import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.StringUtils;
 
@@ -38,7 +38,7 @@ public final class SteamPlatform extends OAuthPlatform {
     @Override
     public String authorize(String state) {
 
-        return HttpClient.builder()
+        return KuHttpClient.builder()
                 .fromUrl(oAuthApi.authorize())
                 .queryParam("openid.mode", "checkid_setup")
                 .queryParam("openid.ns", NS_URL)
@@ -65,7 +65,7 @@ public final class SteamPlatform extends OAuthPlatform {
 
     @Override
     protected KuOAuthUser getUserInfo(KuOAuthToken authToken) {
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.userInfo())
                 .queryParam("key", config.getClientSecret())
                 .queryParam("steamids", authToken.getOpenId())

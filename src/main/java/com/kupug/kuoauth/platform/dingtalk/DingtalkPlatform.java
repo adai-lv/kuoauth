@@ -9,7 +9,7 @@ import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
 import com.kupug.kuoauth.utils.Base64Utils;
-import com.kupug.kuoauth.utils.HttpClient;
+import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.OAuthUtils;
 
@@ -33,7 +33,7 @@ public final class DingtalkPlatform extends OAuthPlatform {
     @Override
     public String authorize(String state) {
 
-        return HttpClient.builder()
+        return KuHttpClient.builder()
                 .fromUrl(oAuthApi.authorize())
                 .queryParam("response_type", "code")
                 .queryParam("appid", config.getClientId())
@@ -57,7 +57,7 @@ public final class DingtalkPlatform extends OAuthPlatform {
     @Override
     protected KuOAuthUser getUserInfo(KuOAuthToken authToken) {
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(getUserInfoUrl())
                 .queryParam("tmp_auth_code", authToken.getAccessToken())
                 .requestBody(true)
@@ -90,7 +90,7 @@ public final class DingtalkPlatform extends OAuthPlatform {
         String timestamp = System.currentTimeMillis() + "";
         String urlEncodeSignature = generateSignature(config.getClientSecret(), timestamp);
 
-        return HttpClient.builder()
+        return KuHttpClient.builder()
                 .fromUrl(oAuthApi.userInfo())
                 .queryParam("signature", urlEncodeSignature)
                 .queryParam("timestamp", timestamp)

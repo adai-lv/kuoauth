@@ -7,7 +7,7 @@ import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.utils.HttpClient;
+import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 
 /**
@@ -35,7 +35,7 @@ public final class AliyunPlatform extends OAuthPlatform {
     @Override
     public String authorize(String state) {
 
-        return HttpClient.builder()
+        return KuHttpClient.builder()
                 .fromUrl(oAuthApi.authorize())
                 .queryParam("response_type", "code")
                 .queryParam("access_type", "offline")
@@ -49,7 +49,7 @@ public final class AliyunPlatform extends OAuthPlatform {
     @Override
     public KuOAuthToken refresh(KuOAuthToken authToken) {
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.refresh())
                 .queryParam("client_id", config.getClientId())
                 .queryParam("client_secret", config.getClientSecret())
@@ -65,7 +65,7 @@ public final class AliyunPlatform extends OAuthPlatform {
     @Override
     public boolean revoke(KuOAuthToken authToken) {
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.revoke())
                 .queryParam("token", authToken.getAccessToken())
                 .queryParam("client_id", config.getClientId())
@@ -85,7 +85,7 @@ public final class AliyunPlatform extends OAuthPlatform {
     @Override
     protected KuOAuthToken getAccessToken(KuOAuthCallback authCallback) {
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.accessToken())
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", authCallback.getCode())
@@ -101,7 +101,7 @@ public final class AliyunPlatform extends OAuthPlatform {
 
     @Override
     protected KuOAuthUser getUserInfo(KuOAuthToken authToken) {
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.userInfo())
                 .queryParam("access_token", authToken.getAccessToken())
                 .get();

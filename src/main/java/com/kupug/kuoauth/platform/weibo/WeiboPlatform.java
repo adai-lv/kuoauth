@@ -6,7 +6,7 @@ import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.utils.HttpClient;
+import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
 import com.kupug.kuoauth.utils.UrlUtils;
 
@@ -34,7 +34,7 @@ public final class WeiboPlatform extends OAuthPlatform {
      */
     @Override
     public String authorize(String state) {
-        return HttpClient.builder()
+        return KuHttpClient.builder()
                 .fromUrl(oAuthApi.authorize())
                 .queryParam("response_type", "code")
                 .queryParam("client_id", config.getClientId())
@@ -47,7 +47,7 @@ public final class WeiboPlatform extends OAuthPlatform {
     @Override
     public boolean revoke(KuOAuthToken authToken) {
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.revoke())
                 .queryParam("access_token", authToken.getAccessToken())
                 .get();
@@ -64,7 +64,7 @@ public final class WeiboPlatform extends OAuthPlatform {
     @Override
     protected KuOAuthToken getAccessToken(KuOAuthCallback authCallback) {
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.accessToken())
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("code", authCallback.getCode())
@@ -86,7 +86,7 @@ public final class WeiboPlatform extends OAuthPlatform {
 
         String oauthParam = String.format("uid=%s&access_token=%s", uid, accessToken);
 
-        String responseBody = HttpClient.builder()
+        String responseBody = httpClientBuilder()
                 .fromUrl(oAuthApi.userInfo())
                 .addHeader("Authorization", "OAuth2 " + oauthParam)
                 .addHeader("API-RemoteIP", UrlUtils.getLocalIp())

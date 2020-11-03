@@ -14,7 +14,7 @@ import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.utils.HttpClient;
+import com.kupug.kuoauth.KuHttpClient;
 
 /**
  * <p>
@@ -45,7 +45,7 @@ public final class AlipayPlatform extends OAuthPlatform {
     @Override
     public String authorize(String state) {
 
-        return HttpClient.builder()
+        return KuHttpClient.builder()
                 .fromUrl(oAuthApi.authorize())
                 .queryParam("app_id", config.getClientId())
                 .queryParam("redirect_uri", config.getRedirectUri())
