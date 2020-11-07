@@ -13,6 +13,9 @@ import com.kupug.kuoauth.utils.JsonUtils;
  */
 final class OAuthToken {
 
+    private String error;
+    private String errorDescription;
+
     /**
      * 要获取的Access Token
      */
@@ -44,6 +47,22 @@ final class OAuthToken {
      * 基于http调用Open API时计算参数签名用的签名密钥。
      */
     private String sessionSecret;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getErrorDescription() {
+        return errorDescription;
+    }
+
+    public void setErrorDescription(String errorDescription) {
+        this.errorDescription = errorDescription;
+    }
 
     public String getAccessToken() {
         return accessToken;

@@ -13,6 +13,9 @@ import com.kupug.kuoauth.utils.JsonUtils;
  */
 final class OAuthToken {
 
+    private String error;
+    private String errorDescription;
+
     private String accessToken;
     private String refreshToken;
     private Integer expiresIn;
@@ -20,6 +23,22 @@ final class OAuthToken {
     private String requestId;
     private String tokenType;
     private String idToken;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getErrorDescription() {
+        return errorDescription;
+    }
+
+    public void setErrorDescription(String errorDescription) {
+        this.errorDescription = errorDescription;
+    }
 
     public String getAccessToken() {
         return accessToken;

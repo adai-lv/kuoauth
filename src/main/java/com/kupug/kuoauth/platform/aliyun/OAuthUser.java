@@ -15,6 +15,9 @@ import com.kupug.kuoauth.utils.JsonUtils;
  */
 final class OAuthUser {
 
+    private String error;
+    private String errorDescription;
+
     /**
      * 登录用户的UID
      * scope=openid
@@ -51,6 +54,22 @@ final class OAuthUser {
      * scope=aliuid
      */
     private String uid;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getErrorDescription() {
+        return errorDescription;
+    }
+
+    public void setErrorDescription(String errorDescription) {
+        this.errorDescription = errorDescription;
+    }
 
     public String getSub() {
         return sub;

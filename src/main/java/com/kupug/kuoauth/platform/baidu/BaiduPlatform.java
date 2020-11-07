@@ -9,6 +9,7 @@ import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
 import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
+import com.kupug.kuoauth.utils.StringUtils;
 
 import java.util.Objects;
 
@@ -100,6 +101,11 @@ public final class BaiduPlatform extends OAuthPlatform {
 
         OAuthToken oAuthToken = JsonUtils.parseObject(responseBody, OAuthToken.class);
 
+        if (StringUtils.isNotEmpty(oAuthToken.getError())) {
+            throw new KuOAuthException(
+                    String.format("[%s]%s", oAuthToken.getError(), oAuthToken.getErrorDescription()));
+        }
+
         return oAuthToken.valueOf();
     }
 
@@ -113,8 +119,8 @@ public final class BaiduPlatform extends OAuthPlatform {
         OAuthUser oAuthUser = JsonUtils.parseObject(responseBody, OAuthUser.class);
 
         if (Objects.nonNull(oAuthUser.getErrorCode())) {
-            throw new KuOAuthException(String.format("[%s]%s",
-                    oAuthUser.getErrorCode(), oAuthUser.getErrorMsg()));
+            throw new KuOAuthException(
+                    String.format("[%s]%s", oAuthUser.getErrorCode(), oAuthUser.getErrorMsg()));
         }
 
         return oAuthUser.valueOf();

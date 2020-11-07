@@ -14,6 +14,7 @@ import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -185,10 +186,22 @@ public final class KuHttpClient {
 
         try (Response response = httpClient.newCall(request).execute()) {
 
-            LOGGER.debug("Response Info: {} ", response);
+            LOGGER.debug("Response: {}", response);
 
             if (!response.isSuccessful()) {
-                throw new KuOAuthException("Unexpected code " + response);
+                try {
+                    String responseBody = response.body().string();
+                    LOGGER.error("Response Body: {}", responseBody);
+
+                    if (response.code() >= 500) {
+                        throw new KuOAuthException("Internal Server Error【%s】:" + responseBody);
+                    }
+
+                    return responseBody;
+
+                } catch (EOFException e) {
+                    throw new KuOAuthException(String.format("[%s]%s", response.code(), response.message()));
+                }
             }
 
             return response.body().string();

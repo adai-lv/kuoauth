@@ -38,7 +38,7 @@ public class OschinaPlatformTest {
     public void accessToken() {
 
         KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
-                .code("Oa9eux")
+                .code("McSqzT")
                 .state("409edd713ff75da5f8c3c8cafb37cecd")
                 .build();
 
@@ -51,8 +51,8 @@ public class OschinaPlatformTest {
     public void userInfo() {
 
         KuOAuthToken oAuthToken = KuOAuthToken.builder()
-                .accessToken("8e86d84e-7dc2-446c-80ca-e8209c6b43b5")
-                .refreshToken("4a00b034-4433-41cd-b40d-0d3a58224c26")
+                .accessToken("cb10840e-12f3-4683-8ac5-62e107f3d98")
+                .refreshToken("52134b29-65a7-4dd5-8a31-5afc8f4aafd0")
                 .expiresIn(604687)
                 .build();
 

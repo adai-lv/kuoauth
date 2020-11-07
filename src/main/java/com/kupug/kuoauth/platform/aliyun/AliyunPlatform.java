@@ -1,14 +1,15 @@
 package com.kupug.kuoauth.platform.aliyun;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.kupug.kuoauth.KuHttpClient;
+import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthCallback;
 import com.kupug.kuoauth.model.KuOAuthConfig;
-import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
+import com.kupug.kuoauth.utils.StringUtils;
 
 /**
  * <p>
@@ -59,6 +60,11 @@ public final class AliyunPlatform extends OAuthPlatform {
 
         OAuthToken oAuthToken = JsonUtils.parseObject(responseBody, OAuthToken.class);
 
+        if (StringUtils.isNotEmpty(oAuthToken.getError())) {
+            throw new KuOAuthException(
+                    String.format("[%s]%s", oAuthToken.getError(), oAuthToken.getErrorDescription()));
+        }
+
         return oAuthToken.valueOf();
     }
 
@@ -96,6 +102,11 @@ public final class AliyunPlatform extends OAuthPlatform {
 
         OAuthToken oAuthToken = JsonUtils.parseObject(responseBody, OAuthToken.class);
 
+        if (StringUtils.isNotEmpty(oAuthToken.getError())) {
+            throw new KuOAuthException(
+                    String.format("[%s]%s", oAuthToken.getError(), oAuthToken.getErrorDescription()));
+        }
+
         return oAuthToken.valueOf();
     }
 
@@ -107,6 +118,11 @@ public final class AliyunPlatform extends OAuthPlatform {
                 .get();
 
         OAuthUser oAuthUser = JsonUtils.parseObject(responseBody, OAuthUser.class);
+
+        if (StringUtils.isNotEmpty(oAuthUser.getError())) {
+            throw new KuOAuthException(
+                    String.format("[%s]%s", oAuthUser.getError(), oAuthUser.getErrorDescription()));
+        }
 
         return oAuthUser.valueOf();
     }

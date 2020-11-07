@@ -17,6 +17,9 @@ import java.util.Objects;
  */
 final class OAuthUser {
 
+    private String error;
+    private Integer errorCode;
+
     private Long id;
     private String idStr;
     private String name;
@@ -29,6 +32,22 @@ final class OAuthUser {
     private String location;
     private String description;
     private String gender;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
+    }
 
     public Long getId() {
         return id;

@@ -6,7 +6,7 @@
 
     <groupId>com.kupug.kuoauth</groupId>
     <artifactId>kupug-kuoauth</artifactId>
-    <version>1.0-release</version>
+    <version>1.3-release</version>
 
     <name>KuOAuth</name>
     <description>集成第三方授权登录的工具箱，它可以让开发者脱离繁琐的第三方登录SDK，让实现登录功能变得方便、简单!</description>

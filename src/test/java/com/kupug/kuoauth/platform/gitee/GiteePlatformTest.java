@@ -38,7 +38,7 @@ public class GiteePlatformTest {
     public void accessToken() {
 
         KuOAuthCallback oAuthCallback = KuOAuthCallback.buider()
-                .code("1db08cd42636b272f246bfdc1c26d402c9cf96e17fa75dfe16e3878cca771b65")
+                .code("112c31656e18d881b54a17b648a05282a9b3253517b4b5ebf9c371c49979a890")
                 .state("a1ce0cc847c43c66896ff74b0850f563")
                 .build();
 
@@ -51,8 +51,8 @@ public class GiteePlatformTest {
     public void userInfo() {
 
         KuOAuthToken oAuthToken = KuOAuthToken.builder()
-                .accessToken("ce0fd0692c3b80037f804bb140a440ff")
-                .refreshToken("de338764e46b90ba184787cfdba8d6efe52132072924c6bd9f44188ad81d929b")
+                .accessToken("8a0b41759e1356dea385fbd68cc5146f")
+                .refreshToken("d3c45d6d95bdb1a4774605e754f1fbe50986658b261aa1bcce961fe5775a480c")
                 .expiresIn(86400)
                 .build();
 

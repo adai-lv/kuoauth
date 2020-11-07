@@ -15,6 +15,8 @@ import com.kupug.kuoauth.utils.JsonUtils;
  */
 final class OAuthUser {
 
+    private String message;
+
     private String id;
     private String login;
     private String avatarUrl;
@@ -24,6 +26,14 @@ final class OAuthUser {
     private String location;
     private String email;
     private String bio;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public String getId() {
         return id;

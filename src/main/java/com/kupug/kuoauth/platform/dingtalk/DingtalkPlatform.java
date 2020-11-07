@@ -66,8 +66,8 @@ public final class DingtalkPlatform extends OAuthPlatform {
         JsonNode responseObject = JsonUtils.parseObject(responseBody);
         int errorCode = responseObject.get("errcode").asInt();
         if (errorCode != 0) {
-            throw new KuOAuthException(String.format("[%d]%s",
-                    errorCode, responseObject.get("errmsg").asText()));
+            throw new KuOAuthException(
+                    String.format("[%d]%s", errorCode, responseObject.get("errmsg").asText()));
         }
 
         if (!responseObject.has("user_info")) {

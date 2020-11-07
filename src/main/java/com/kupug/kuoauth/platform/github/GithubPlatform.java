@@ -1,13 +1,14 @@
 package com.kupug.kuoauth.platform.github;
 
+import com.kupug.kuoauth.KuHttpClient;
+import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthCallback;
 import com.kupug.kuoauth.model.KuOAuthConfig;
-import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
+import com.kupug.kuoauth.utils.StringUtils;
 import com.kupug.kuoauth.utils.UrlUtils;
 
 import java.util.Map;
@@ -57,13 +58,13 @@ public final class GithubPlatform extends OAuthPlatform {
                 .queryParam("client_id", config.getClientId())
                 .queryParam("client_secret", config.getClientSecret())
                 .queryParam("redirect_uri", config.getRedirectUri())
-                .timeout(10000)
                 .post();
 
         Map<String, String> responseMap = UrlUtils.valueOf(responseBody, true);
 
-        if (responseMap.containsKey("error") && responseMap.containsKey("error_description")) {
-            throw new KuOAuthException(responseMap.get("error") + ": " + responseMap.get("error_description"));
+        if (responseMap.containsKey("error")) {
+            throw new KuOAuthException(
+                    responseMap.get("error") + ": " + responseMap.get("error_description"));
         }
 
         return OAuthToken.valueOf(responseMap);
@@ -77,6 +78,10 @@ public final class GithubPlatform extends OAuthPlatform {
                 .get();
 
         OAuthUser oAuthUser = JsonUtils.parseObject(responseBody, OAuthUser.class);
+
+        if (StringUtils.isNotEmpty(oAuthUser.getMessage())) {
+            throw new KuOAuthException(oAuthUser.getMessage());
+        }
 
         return oAuthUser.valueOf();
     }

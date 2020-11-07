@@ -15,6 +15,9 @@ import com.kupug.kuoauth.utils.JsonUtils;
  */
 final class OAuthUser {
 
+    private String error;
+    private String errorDescription;
+
     private String sub;
     private String name;
     private String givenName;
@@ -22,6 +25,22 @@ final class OAuthUser {
     private String email;
     private String picture;
     private String locale;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getErrorDescription() {
+        return errorDescription;
+    }
+
+    public void setErrorDescription(String errorDescription) {
+        this.errorDescription = errorDescription;
+    }
 
     public String getSub() {
         return sub;

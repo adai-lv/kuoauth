@@ -1,13 +1,15 @@
 package com.kupug.kuoauth.platform.weibo;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.kupug.kuoauth.KuHttpClient;
+import com.kupug.kuoauth.KuOAuthException;
 import com.kupug.kuoauth.model.KuOAuthCallback;
 import com.kupug.kuoauth.model.KuOAuthConfig;
 import com.kupug.kuoauth.model.KuOAuthToken;
 import com.kupug.kuoauth.model.KuOAuthUser;
 import com.kupug.kuoauth.platform.OAuthPlatform;
-import com.kupug.kuoauth.KuHttpClient;
 import com.kupug.kuoauth.utils.JsonUtils;
+import com.kupug.kuoauth.utils.StringUtils;
 import com.kupug.kuoauth.utils.UrlUtils;
 
 /**
@@ -54,6 +56,12 @@ public final class WeiboPlatform extends OAuthPlatform {
 
         JsonNode object = JsonUtils.parseObject(responseBody);
 
+        if (object.has("error")) {
+            String errorMsg = String.format("%s[%d]: %s", object.get("error").asText(),
+                    object.get("error_code").asInt(), object.get("error_description").asText());
+            throw new KuOAuthException(errorMsg);
+        }
+
         if (object.has("result")) {
             return object.get("result").asBoolean();
         }
@@ -75,6 +83,12 @@ public final class WeiboPlatform extends OAuthPlatform {
 
         OAuthToken oAuthToken = JsonUtils.parseObject(responseBody, OAuthToken.class);
 
+        if (StringUtils.isNotEmpty(oAuthToken.getError())) {
+            String errorMsg = String.format("%s[%d]: %s",
+                    oAuthToken.getError(), oAuthToken.getErrorCode(), oAuthToken.getErrorDescription());
+            throw new KuOAuthException(errorMsg);
+        }
+
         return oAuthToken.valueOf();
     }
 
@@ -95,6 +109,11 @@ public final class WeiboPlatform extends OAuthPlatform {
                 .get();
 
         OAuthUser oAuthUser = JsonUtils.parseObject(responseBody, OAuthUser.class);
+
+        if (StringUtils.isNotEmpty(oAuthUser.getError())) {
+            throw new KuOAuthException(
+                    String.format("%s[%d]", oAuthUser.getError(), oAuthUser.getErrorCode()));
+        }
 
         return oAuthUser.valueOf();
     }
